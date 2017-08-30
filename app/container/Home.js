@@ -17,7 +17,7 @@ class Home extends Component{
       <WingBlank size="sm">
         <View>
           <Button style={{marginTop: 15, marginBottom: 15}} type='primary' onClick={()=> {this.setState({visible: true})}}>可以吗</Button>
-          <Button type='primary' onClick={()=> navigate('User',{name: '周莹凯'})}>跳转呀</Button>
+          <Button type='primary' onClick={()=> navigate('User',{name: '周莹凯'})}>跳转lo</Button>
           <ActivityIndicator
             text="Loading..."
           />
