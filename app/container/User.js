@@ -5,6 +5,8 @@ class User extends Component{
   static navigationOptions = {
     title: '我的',
     tabBarLabel: '我的',
+    headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
+    headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={require('../img/me.png')}
@@ -19,9 +21,7 @@ class User extends Component{
   render(){
     return(
       <View>
-        <WingBlank size="sm">
-          <Text> User page</Text>
-        </WingBlank>
+          <Text>User page</Text>
       </View>  
     ) 
   }
