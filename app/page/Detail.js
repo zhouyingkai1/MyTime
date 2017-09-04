@@ -16,12 +16,12 @@ class Detail extends Component{
     return(
         <ParallaxScrollView
           style={{ flex: 1, backgroundColor: 'hotpink', overflow: 'hidden' }}
-          renderBackground={() => <Image source={{ uri: `http://ww4.sinaimg.cn/large/610dc034jw1f41lxgc3x3j20jh0tcn14.jpg`, width: window.width, height: 350 }}/>}
-          renderFixedHeader={() => <Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>Hello</Text>}
+          renderBackground={() => <Image source={{ uri: params.item.img, width: window.width, height: 350 }}/>}
+          renderFixedHeader={() => <Text style={{ textAlign: 'right', color: 'white', padding: 5, fontSize: 20 }}>{params.item.title}</Text>}
           parallaxHeaderHeight={ 350 }>
            <StatusBar barStyle='light-content' />
         <View style={{ alignItems: 'center' }}><Text style={{ fontSize: 30 }}>Meow!</Text></View>
-        <Button onClick={()=>navigate('UserDetail')}>转场</Button>
+        <Text>{params.item.img}</Text>
        </ParallaxScrollView>
     ) 
   }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Dimensions, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
-import { Toast, SearchBar, Modal, WingBlank } from 'antd-mobile';
+import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
 import * as TestApi from '../services/testServices'
 const WIDTH = Dimensions.get('window').width;
 const data= [{
@@ -47,49 +47,86 @@ class Home extends Component{
       modalImg: '',
       dataList: [],
       total: 1,
+      isrefresh: false,
+      currentPage: 1
     }
   }
   componentDidMount() {
-   TestApi.artcleList({
-      page: 1,
+    this.fetchData(1)
+  }
+  fetchData(page) {
+    TestApi.artcleList({
+      page: page,
       sort: 0,
       categroyId: '',
       bigCate: '',
       userId: 1
-   }).then(data=> {
-     this.setState({
-       dataList: data.data,
-       total: data.total
-     })
-   })
-  }
-  clickItem(img) {
-    this.setState({
-      visible: true,
-      modalImg: img
+    }).then(data=> {
+      this.setState({
+        dataList: data.data,
+        total: data.total,
+        refresh: false
+      })
     })
+  }
+  clickItem(item) {
+    this.props.navigation.navigate('Detail',{item: item})
   }
   renderItem(item) {
     return(
-      <TouchableOpacity onPress={()=> this.clickItem(item.img)}>
+      <TouchableOpacity style={{height: 60, justifyContent: 'center'}} onPress={()=> this.clickItem(item)}>
         {/* <Image source={{uri: item.img}} style={styles.img}/> */}
-        <Text>{item.title}</Text>
+        <WingBlank size="lg">
+          <Text>{item.title}</Text>
+        </WingBlank>
       </TouchableOpacity>  
     )
   }
+  renderLine(){
+    return(
+      <View style={{height: 1, flex: 1, backgroundColor: '#e1e1e1', marginBottom: 5}}>
+      </View>  
+    )
+  }
+  renderFooter() {
+    return(
+      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+        <ActivityIndicator size='small' color='red' animating={this.state.isLoading} />
+        <Text style={{color: 'red'}}>玩命加载中……</Text>
+      </View>
+    )
+  }
+  renderHeader() {
+    return(
+      <View style={{backgroundColor: '#f1f1f1', height: 50, justifyContent: 'center'}}>
+        <Text style={{color: '#333', }}>
+          热门
+        </Text>  
+      </View>  
+    )
+  }
+  refresh() {
+    this.fetchData(2)
+  }
   render(){
     const { navigate } = this.props.navigation
-    const { dataList } = this.state
+    const { dataList, isrefresh } = this.state
     return(
       <View> 
         <StatusBar barStyle='light-content' />
-        <WingBlank size="sm">
         <FlatList
           data={dataList}
           keyExtractor={item=> item.id}
+          ItemSeparatorComponent={()=> this.renderLine()}
+          ListFooterComponent={()=> this.renderFooter()}
+          ListHeaderComponent={()=> this.renderHeader()}
+          onRefresh={()=> this.refresh()}
+          refreshing={isrefresh}
           renderItem={({item, index}) => this.renderItem(item)}
+          onEndReachedThreshold={.3}
+          onEndReached={()=> this.setState({isLoading: true})}
         />
-        </WingBlank>
+        
         <Modal
           transparent
           maskClosable={false}
