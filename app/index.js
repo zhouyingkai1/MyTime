@@ -1,29 +1,24 @@
-import { StackNavigator, TabNavigator } from 'react-navigation';
-import HomeScreen from './container/Home'
-import UserScreen from './container/User'
-import Detail from './page/Detail'
-import UserDetail from './page/UserDetail'
-const TabBar = TabNavigator({
-  Home: { screen: HomeScreen },
-  User: { screen: UserScreen },
-},{
-  tabBarOptions: {
-    inactiveTintColor: '#333',
-    swipeEnabled: true,
-    labelStyle: {
-      fontSize: 12,
-      marginBottom: 5,
-    },
-  }
-});
-const App = StackNavigator({
-  TabBar: { screen: TabBar },
-  Detail: { 
-    screen: Detail, 
-  },
-  UserDetail: { 
-    screen: UserDetail, 
-  },
-});
+import React from 'react'
+import { AppRegistry, AsyncStorage } from 'react-native'
+// import { persistStore, autoRehydrate } from 'redux-persist'
+import { Toast } from 'antd-mobile'
+import dva from './utils/dva'
+import Router from './router'
 
-export default App
+import appModel from './models/appModel'
+import routerModel from './models/routerModel'
+import homeModel from './models/homeModel'
+
+const app = dva({
+  initialState: {},
+  models: [appModel, routerModel, homeModel],
+  // extraEnhancers: [autoRehydrate()],
+  onError(e) {
+    console.log(e)
+  }
+})
+
+const App = app.start(<Router />)
+// persistStore(app.getStore(), { storage: AsyncStorage })
+
+AppRegistry.registerComponent('MyTime', () => App)

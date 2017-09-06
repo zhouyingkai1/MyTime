@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { View, Text, Dimensions, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
 import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
 import * as TestApi from '../services/testServices'
@@ -52,6 +53,7 @@ class Home extends Component{
     }
   }
   componentDidMount() {
+    console.log(this.props,'this.props')
     this.fetchData(1)
   }
   fetchData(page) {
@@ -161,4 +163,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Home
+export default connect((home)=> home)(Home)
