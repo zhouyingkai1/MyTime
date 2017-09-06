@@ -1,5 +1,5 @@
 import ImageBtn from './common/ImageBtn'
 
-export default{
+module.exports={
   ImageBtn,
 }

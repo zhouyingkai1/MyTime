@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
+import { View, Text, Dimensions, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
 import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
-import theme from '../utils/theme'
-import pxToDp from '../utils/pxToDp'
-
 import * as TestApi from '../services/testServices'
+import Swiper from 'react-native-swiper';
+
+const WIDTH = Dimensions.get('window').width;
 const data= [{
   id: 1,
   img: 'http://ww4.sinaimg.cn/large/610dc034jw1f41lxgc3x3j20jh0tcn14.jpg',
@@ -51,14 +50,29 @@ class Home extends Component{
       dataList: [],
       total: 1,
       isrefresh: false,
-      currentPage: 1
+      currentPage: 1,
+      isFull: false,
+      didMount: false
     }
   }
   componentDidMount() {
-    console.log(this.props,'this.props')
     this.fetchData(1)
+    setTimeout(()=> {
+      this.setState({
+        didMount: true
+      })
+    }, 100)
   }
   fetchData(page) {
+    if(page > this.state.total ){
+      this.setState({
+        isFull: true
+      })
+      return
+    }
+    this.setState({
+      currentPage: page
+    })
     TestApi.artcleList({
       page: page,
       sort: 0,
@@ -66,11 +80,20 @@ class Home extends Component{
       bigCate: '',
       userId: 1
     }).then(data=> {
-      this.setState({
-        dataList: data.data,
-        total: data.total,
-        refresh: false
-      })
+      if(page>1){
+        this.setState({
+          dataList: this.state.dataList.concat(data.data),
+          total: Math.ceil(data.total/10),
+          refresh: false,
+          isLoading: false,
+        })
+      }else{
+        this.setState({
+          dataList: data.data,
+          total: data.total,
+          refresh: false
+        })
+      }
     })
   }
   clickItem(item) {
@@ -94,23 +117,43 @@ class Home extends Component{
   }
   renderFooter() {
     return(
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-        <ActivityIndicator size='small' color='red' animating={this.state.isLoading} />
-        <Text style={{color: 'red'}}>玩命加载中……</Text>
+      <View style={{justifyContent: 'center', flexDirection: 'row'}}>
+        {
+          this.state.isFull? <Text>已为您加载全部</Text>: 
+          <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+            <ActivityIndicator size='small' color='red' animating={this.state.isLoading} />
+            <Text style={{color: 'red'}}>玩命加载中……</Text>
+          </View>
+        }
       </View>
     )
   }
+  //下拉加载
+  fetchMore() {
+    const page = this.state.currentPage + 1
+    this.setState({
+      isLoading: true,
+    })
+    this.fetchData(page)
+  }
   renderHeader() {
     return(
-      <View style={{backgroundColor: '#f1f1f1', height: 50, justifyContent: 'center'}}>
-        <Text style={{color: '#333', }}>
-          热门
-        </Text>  
-      </View>  
+      <Swiper autoplay={true} style={styles.wrapper} >
+        {
+          this.state.didMount?
+            data.map((item, index)=> {
+              return(
+                <View key={index}>
+                  <Image source={{uri: item.img}} style={{height: 200, width: WIDTH}}/>
+                </View>  
+              )
+            }) : <View></View>
+        }
+      </Swiper>
     )
   }
   refresh() {
-    this.fetchData(2)
+    this.fetchData(1)
   }
   render(){
     const { navigate } = this.props.navigation
@@ -128,21 +171,67 @@ class Home extends Component{
           refreshing={isrefresh}
           renderItem={({item, index}) => this.renderItem(item)}
           onEndReachedThreshold={.3}
-          onEndReached={()=> this.setState({isLoading: true})}
+          onEndReached={()=> this.fetchMore()}
         />
+        
+        <Modal
+          transparent
+          maskClosable={false}
+          visible={this.state.visible}
+          onClose={()=> this.setState({visible: false})}
+          footer={[{ text: '下载', onPress: () => {} }]}
+          >
+            <View style={{flex: 1}}>
+              <Image  source={{uri: this.state.modalImg}} style={styles.modalImg}/>
+            </View>  
+        </Modal>  
       </View>  
     ) 
   }
 }
 const styles = StyleSheet.create({
   icon: {
-    height: pxToDp(60),
-    width: pxToDp(60)
+    height: 30,
+    width: 30
+  },
+  header: {
+    height: 64,
+    backgroundColor:'#108ee9',
+    paddingTop: 18,
   },
   img:{
-    width: theme.screenWidth,
-    height: pxToDp(400),
+    width: WIDTH,
+    height: 200,
   },
+  modalImg: {
+    width: 400,
+  },
+  wrapper: {
+    height: 200,
+  },
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+  },
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#97CAE5',
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#92BBD9',
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  }
 })
 
-export default connect((home)=> home)(Home)
+export default Home

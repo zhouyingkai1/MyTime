@@ -35,7 +35,7 @@ class User extends Component{
           <Item extra={'15'} >阅读</Item>
           <Item extra={'20'} >收藏</Item>
         </List> 
-        <WingBlank>
+        <WingBlank size='sm'>
           <Button onClick={()=> navigate('Login')}>退出登录</Button>
         </WingBlank>
       </View>

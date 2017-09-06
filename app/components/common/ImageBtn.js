@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import { View, Image, TouchableOpacity } from 'react-native'
 
 const ImageBtn = (props)=> {
-  const { onPress={}, style } = props
+  const { onPress, source, style } = props
+  console.log(style,'ddd')
   return(
     <TouchableOpacity onPress={onPress}>
       <Image 
         source={source}
-        style={...style}
+        style={{...style}}
       />
     </TouchableOpacity>
   )
