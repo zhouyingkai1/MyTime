@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
-import { WingBlank, Button } from 'antd-mobile';
+import { WingBlank, Button, List } from 'antd-mobile';
+import pxToDp from '../utils/pxToDp'
+const Item = List.Item;
 class User extends Component{
   static navigationOptions = {
     title: '我的',
@@ -17,20 +19,33 @@ class User extends Component{
   constructor(props){
     super(props)
   }
-  
+  renderHedaer() {
+    return(
+      <View style={{height: pxToDp(10), backgroundColor: '#eee'}}></View>
+    )
+  }
   render(){
     const { navigate } = this.props.navigation
     return(
-      <WingBlank>
-        <Button onClick={()=> navigate('Login')}>登录</Button>
-      </WingBlank>
+      <View>
+        <List>
+          <Item extra={'点我'} onClick={()=> navigate('Login')}>点击登录</Item>
+        </List>
+        <List renderHeader={() => this.renderHedaer()}>
+          <Item extra={'15'} >阅读</Item>
+          <Item extra={'20'} >收藏</Item>
+        </List> 
+        <WingBlank>
+          <Button onClick={()=> navigate('Login')}>退出登录</Button>
+        </WingBlank>
+      </View>
     ) 
   }
 }
 const styles = StyleSheet.create({
   icon: {
-    height: 19,
-    width: 19
+    height: pxToDp(40),
+    width: pxToDp(40)
   }
 })
 export default User

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {connect} from 'react-redux'
 import { Text, Dimensions, StyleSheet, View, Image, StatusBar, TextInput, TouchableOpacity } from 'react-native'
 import theme from '../utils/theme'
 import { WingBlank, Button } from 'antd-mobile';
@@ -25,7 +26,7 @@ class Login extends Component{
                 <TextInput style={styles.input}/>
               </View>
               <View style={styles.formItem}>
-                <Image style={styles.formIcon} source={require('../img/icon_user.png')}/>
+                <Image style={styles.formIcon} source={require('../img/icon_pwd.png')}/>
                 <TextInput style={styles.input}/>
               </View>
               <Button style={styles.loginBtn} type='primary'>登录</Button>
@@ -85,4 +86,4 @@ const styles = StyleSheet.create({
     width: pxToDp(322),
   }
 })
-export default Login
+export default connect((login)=> login)(Login)

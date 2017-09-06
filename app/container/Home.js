@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
 import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
 import theme from '../utils/theme'
+import pxToDp from '../utils/pxToDp'
+
 import * as TestApi from '../services/testServices'
 const data= [{
   id: 1,
@@ -128,39 +130,19 @@ class Home extends Component{
           onEndReachedThreshold={.3}
           onEndReached={()=> this.setState({isLoading: true})}
         />
-        
-        <Modal
-          transparent
-          maskClosable={false}
-          visible={this.state.visible}
-          onClose={()=> this.setState({visible: false})}
-          footer={[{ text: '下载', onPress: () => {} }]}
-          >
-            <View style={{flex: 1}}>
-              <Image  source={{uri: this.state.modalImg}} style={styles.modalImg}/>
-            </View>  
-        </Modal>  
       </View>  
     ) 
   }
 }
 const styles = StyleSheet.create({
   icon: {
-    height: 30,
-    width: 30
-  },
-  header: {
-    height: 64,
-    backgroundColor:'#108ee9',
-    paddingTop: 18,
+    height: pxToDp(60),
+    width: pxToDp(60)
   },
   img:{
     width: theme.screenWidth,
-    height: 200,
+    height: pxToDp(400),
   },
-  modalImg: {
-    width: 400,
-  }
 })
 
 export default connect((home)=> home)(Home)
