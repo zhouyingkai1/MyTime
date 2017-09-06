@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
-import { WingBlank } from 'antd-mobile';
+import { WingBlank, Button } from 'antd-mobile';
 class User extends Component{
   static navigationOptions = {
     title: '我的',
@@ -19,10 +19,11 @@ class User extends Component{
   }
   
   render(){
+    const { navigate } = this.props.navigation
     return(
-      <View>
-          <Text>User page</Text>
-      </View>  
+      <WingBlank>
+        <Button onClick={()=> navigate('Login')}>登录</Button>
+      </WingBlank>
     ) 
   }
 }

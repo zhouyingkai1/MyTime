@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { View, Text, Dimensions, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
+import { View, Text, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
 import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
+import theme from '../utils/theme'
 import * as TestApi from '../services/testServices'
-const WIDTH = Dimensions.get('window').width;
 const data= [{
   id: 1,
   img: 'http://ww4.sinaimg.cn/large/610dc034jw1f41lxgc3x3j20jh0tcn14.jpg',
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     paddingTop: 18,
   },
   img:{
-    width: WIDTH,
+    width: theme.screenWidth,
     height: 200,
   },
   modalImg: {

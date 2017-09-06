@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {StyleSheet, View, WebView, Image, Dimensions, InteractionManager, StatusBar, Text, TouchableOpacity, ActivityIndicator, Alert, Linking, Clipboard, Modal, PanResponder, Animated, ToastAndroid} from 'react-native';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
-
+import pxToDp from '../utils/pxToDp'
 const window = Dimensions.get('window');
 class Detail extends Component{
   static navigationOptions = {
@@ -23,7 +23,7 @@ class Detail extends Component{
       onPanResponderMove: (evt, gestureState) => {
         let y = gestureState.dy;
         if(y > this.moveYThreshold && this.animationFlag) { //drag down
-          if (this.state.bottomInfoBarBottomValue === px2dp(0)) return;
+          if (this.state.bottomInfoBarBottomValue === pxToDp(0)) return;
           this.animationFlag = false;
           Animated.timing(this.state.bottomInfoBarBottomValue, {
             toValue: 0,
@@ -31,10 +31,10 @@ class Detail extends Component{
           }).start(() => this.animationFlag = true);
         }
         if(y < -this.moveYThreshold && this.animationFlag) {  //drag up
-          if (this.state.bottomInfoBarBottomValue === px2dp(-45)) return;
+          if (this.state.bottomInfoBarBottomValue === pxToDp(-45)) return;
           this.animationFlag = false;
           Animated.timing(this.state.bottomInfoBarBottomValue, {
-            toValue: px2dp(-45),
+            toValue: pxToDp(-45),
             duration: 300
           }).start(() => this.animationFlag = true);
         }

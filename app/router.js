@@ -13,6 +13,7 @@ import HomeScreen from './container/Home'
 import UserScreen from './container/User'
 import Detail from './page/Detail'
 import UserDetail from './page/UserDetail'
+import Login from './page/Login'
 
 const TabBar = TabNavigator({
   Home: { screen: HomeScreen },
@@ -27,7 +28,7 @@ const TabBar = TabNavigator({
     },
   }
 });
-
+// headerMode
 const AppNavigator = StackNavigator({
   TabBar: { screen: TabBar },
   Detail: { 
@@ -36,6 +37,12 @@ const AppNavigator = StackNavigator({
   UserDetail: { 
     screen: UserDetail, 
   },
+  Login: {
+    screen: Login,
+    navigationOptions: {
+      headerMode: none,
+    },
+  }
 });
 
 
