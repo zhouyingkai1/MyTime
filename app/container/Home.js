@@ -31,7 +31,7 @@ class Home extends Component{
   static navigationOptions = {
     headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
     headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
-    headerTitle: '自定义',
+    headerTitle: '首页',
     tabBarLabel: '首页',
     headerBackTitle: null,
     tabBarIcon: ({ tintColor }) => (

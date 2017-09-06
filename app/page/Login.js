@@ -7,6 +7,8 @@ import { ImageBtn } from '../components'
 import pxToDp from '../utils/pxToDp'
 const window = Dimensions.get('window');
 class Login extends Component{
+  static navigationOptions = ({ navigation, screenProps })=>({
+  })
   constructor(props){
     super(props)
   }
@@ -32,13 +34,14 @@ class Login extends Component{
     }
   }
   render(){
-    const { ddd } = this.props.login
     return(
       <View style={{}}>
-        <StatusBar barStyle='light-content'/>
+        <StatusBar barStyle='dark-content'/>
         <Image style={{width: theme.screenWidth, height: theme.screenHeight}} source={require('../img/login_bg.png')}>
           <View style={{alignItems: 'center', paddingTop: theme.toolbar.paddingTop}}>
-            <Image source={require('../img/icon_back.png')} style={{width: pxToDp(40), height: pxToDp(40), alignSelf: 'flex-start'}}/>
+            <TouchableOpacity style={{alignSelf: 'flex-start', paddingTop: theme.toolbar.paddingTop, marginLeft: pxToDp(20), }}>
+              <Image source={require('../img/icon_back.png')} style={{width: pxToDp(40), height: pxToDp(40), tintColor: '#2269d4', alignSelf: 'flex-start'}}/>
+            </TouchableOpacity> 
             <View stlye={styles.logo}><Text style={{backgroundColor: 'rgba(0,0,0,0)'}}>Logo</Text></View>
             <View style={styles.form}>
               <View style={styles.formItem}>

@@ -4,7 +4,15 @@ import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import pxToDp from '../utils/pxToDp'
 const window = Dimensions.get('window');
 class Detail extends Component{
-  
+  static navigationOptions = ({ navigation, screenProps })=>({
+    headerTitle: navigation.state.params.item.title || '详情页',
+    headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
+    headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
+    headerTintColor: '#fff',
+    // headerBackTitleStyle:{
+    //   color: 'red'
+    // }
+  })
   constructor(props){
     super(props)
     this.state = {
@@ -16,9 +24,7 @@ class Detail extends Component{
     this.moveYThreshold = 5;
     this.animationFlag = true;
   }
-  static navigationOptions = {
-    headerTitle: 'ddd'
-  };
+  
   componentWillMount(){
     this._panResponder = PanResponder.create({
       onMoveShouldSetPanResponder: (evt, gestureState) => true,

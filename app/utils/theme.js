@@ -19,7 +19,7 @@ export default {
   },
   toolbar: {
     height: Platform.OS === 'android' ? pxToDp(40) : pxToDp(49),
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : pxToDp(29),
     //barColor: favoriteColor,
     titleColor: '#fff',
     titleSize: Platform.OS === 'android' ? pxToDp(16) : pxToDp(14),
