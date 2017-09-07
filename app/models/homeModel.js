@@ -1,3 +1,5 @@
+import * as TestApi from '../services/testServices'
+
 export default{
   namespace: 'home',
   state: {

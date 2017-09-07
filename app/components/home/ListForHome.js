@@ -3,6 +3,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Toast, ActivityIndicator, WingBlank } from 'antd-mobile';
 import pxToDp from '../utils/pxToDp'
 import theme from '../utils/theme'
+import Swiper from 'react-native-swiper';
 
 const ListForHome = (props)=> {
   const { fetchData, navigation, isFull, isLoading, currentPage, isrefresh, didMount, imgData,  updateState } = props

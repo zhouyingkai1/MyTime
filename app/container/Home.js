@@ -1,29 +1,28 @@
 import React, { Component } from 'react'
-import { View, Text, Dimensions, Image, TouchableOpacity, StyleSheet, TextInput } from 'react-native'
-import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
-import * as TestApi from '../services/testServices'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import { Toast } from 'antd-mobile';
 import { NavigatorBar, ListForHome } from '../components' 
-import Swiper from 'react-native-swiper';
 import pxToDp from '../utils/pxToDp'
-const WIDTH = Dimensions.get('window').width;
+import { connect } from 'react-redux'
 class Home extends Component{
-  static navigationOptions = {
-    headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
-    headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
-    headerTitle: '首页',
-    tabBarLabel: '首页',
-    headerBackTitle: null,
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={require('../img/home.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
+  // static navigationOptions = {
+  //   headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
+  //   headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
+  //   headerTitle: '首页',
+  //   tabBarLabel: '首页',
+  //   headerBackTitle: null,
+  //   tabBarIcon: ({ tintColor }) => (
+  //     <Image
+  //       source={require('../img/home.png')}
+  //       style={[styles.icon, {tintColor: tintColor}]}
+  //     />
+  //   ),
+  // };
   constructor(props){
     super(props)
   }
   componentDidMount() {
+    console.log(this.props,'propsrrrrrrrrrrrrrr')
     this.fetchData(1)
   }
   
@@ -65,4 +64,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Home
+export default connect((state)=> {home: state.home})(Home)
