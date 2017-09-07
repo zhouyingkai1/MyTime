@@ -19,11 +19,11 @@ export default {
     normalColor: '#aaa'
   },
   toolbar: {
-    height: Platform.OS === 'android' ? pxToDp(40) : pxToDp(49),
-    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : pxToDp(29),
+    height: Platform.OS === 'android' ? pxToDp(100) : pxToDp(120),
+    paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : pxToDp(68),
     //barColor: favoriteColor,
     titleColor: '#fff',
-    titleSize: Platform.OS === 'android' ? pxToDp(16) : pxToDp(14),
-    textBtnSize: Platform.OS === 'android' ? pxToDp(12) : pxToDp(11)
+    titleSize: Platform.OS === 'android' ? pxToDp(40) : pxToDp(34),
+    textBtnSize: Platform.OS === 'android' ? pxToDp(24) : pxToDp(22)
   }
 }

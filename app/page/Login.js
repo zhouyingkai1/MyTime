@@ -8,6 +8,7 @@ import pxToDp from '../utils/pxToDp'
 const window = Dimensions.get('window');
 class Login extends Component{
   static navigationOptions = ({ navigation, screenProps })=>({
+    header: null,
   })
   constructor(props){
     super(props)
@@ -124,4 +125,4 @@ const thredBtn= {
   tintColor: '#108ee9'
 }
 
-export default connect((state)=> {login: state.login})(Login)
+export default connect((state)=> state)(Login)

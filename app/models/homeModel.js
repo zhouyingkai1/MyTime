@@ -38,7 +38,8 @@ export default{
   effects: {
     *fetchData({payload}, {call, select, put}) {
       const total = yield select(state=> state.home.total)
-      if(page > total ){
+      const dataList = yield select(state=> state.home.dataList)
+      if(payload.page > total ){
         yield put({
           type: 'updateState',
           payload: { isFull: true}
@@ -47,24 +48,24 @@ export default{
       }
       const result = yield call(TestApi.artcleList, payload)
       if(result.code == '000'){
-        if(page>1){
+        if(payload.page>1){
           yield put({
             type: 'updateState',
             payload: {
-              dataList: this.state.dataList.concat(data.data),
-              total: Math.ceil(data.total/10),
-              refresh: false,
+              dataList: dataList.concat(result.data),
+              total: Math.ceil(result.total/10),
+              isrefresh: false,
               isLoading: false,
-              currentPage: page
+              currentPage: payload.page
             }
           })
         }else{
           yield put({
             type: 'updateState',
             payload: {
-              dataList: data.data,
-              total: data.total,
-              refresh: false
+              dataList: result.data,
+              total: result.total,
+              isrefresh: false
             }
           })
         }

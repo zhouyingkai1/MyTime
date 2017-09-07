@@ -9,6 +9,7 @@ class User extends Component{
     tabBarLabel: '我的',
     headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
     headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
+  
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={require('../img/me.png')}
@@ -27,7 +28,7 @@ class User extends Component{
   render(){
     const { navigate } = this.props.navigation
     return(
-      <View>
+      <View style={{flex: 1,backgroundColor: '#f1f1f1'}}>
         <List>
           <Item extra={'点我'} onClick={()=> navigate('Login')}>点击登录</Item>
         </List>

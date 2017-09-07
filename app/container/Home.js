@@ -5,32 +5,32 @@ import { NavigatorBar, ListForHome } from '../components'
 import pxToDp from '../utils/pxToDp'
 import { connect } from 'react-redux'
 class Home extends Component{
-  // static navigationOptions = {
-  //   headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
-  //   headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
-  //   headerTitle: '首页',
-  //   tabBarLabel: '首页',
-  //   headerBackTitle: null,
-  //   tabBarIcon: ({ tintColor }) => (
-  //     <Image
-  //       source={require('../img/home.png')}
-  //       style={[styles.icon, {tintColor: tintColor}]}
-  //     />
-  //   ),
-  // };
+  static navigationOptions = {
+    title: '首页',
+    headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
+    headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
+    tabBarLabel: '首页',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../img/home.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
   constructor(props){
     super(props)
   }
   componentDidMount() {
-    console.log(this.props,'propsrrrrrrrrrrrrrr')
-    this.fetchData(1)
-  }
-  
-  fetchData(page) {
+    this.props.dispatch({
+      type: 'home/updateState',
+      payload: {
+        didMount: true
+      }
+    })
     this.props.dispatch({
       type: 'home/fetchData',
       payload:{
-        page: page,
+        page: 1,
         sort: 0,
         categroyId: '',
         bigCate: '',
@@ -39,20 +39,14 @@ class Home extends Component{
     })
   }
   
-  updateState(name,value) {
-    this.props.dispatch({
-      type: 'home/updateState',
-      payload: {
-        [name]: value
-      }
-    })
-  }
   
   render(){
     return(
-      <View> 
-        <NavigatorBar barStyle='ligth-content' title='首页'/>
-        <ListForHome fetchData={this.fetchData} updateState={this.updateState} {...this.props}/>
+      <View style={{flex: 1, backgroundColor: '#f1f1f1'}}> 
+        {/* <NavigatorBar barStyle='light-content' title='首页'/> */}
+        <View style={{flex: 1}}>
+         <ListForHome fetchData={this.fetchData} updateState={this.updateState} {...this.props}/>
+        </View>  
       </View>  
     ) 
   }
@@ -64,4 +58,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default connect((state)=> {home: state.home})(Home)
+export default connect((state)=> state)(Home)

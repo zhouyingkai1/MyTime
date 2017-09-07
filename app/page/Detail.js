@@ -55,14 +55,13 @@ class Detail extends Component{
   //   renderFixedHeader={() => {}}
   //   parallaxHeaderHeight={ 350 }>
   // </ParallaxScrollView>
-  
   render(){
     const { params } = this.props.navigation.state
-    const { navigate } = this.props.navigation
+    const { navigate, goBack } = this.props.navigation
     const { bottomInfoBarBottomValue } = this.state
     return(
       <View style={{flex: 1}}>
-        <NavigatorBar barStyle='ligth-content' leftBtnText={true} title={params.items.title}/>
+        {/* <NavigatorBar barStyle='light-content' goBack={goBack} leftBtnText={true} title={params.item.title}/> */}
           
         <View style={[styles.container, {backgroundColor: '#f1f1f1'}]}>
           <View style={styles.contentContainer} {...this._panResponder.panHandlers}>

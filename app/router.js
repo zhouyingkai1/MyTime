@@ -41,7 +41,7 @@ const AppNavigator = StackNavigator({
     screen: Login,
   }
 },{
-  headerMode : 'none'
+  headerMode : 'screen'
 });
 
 

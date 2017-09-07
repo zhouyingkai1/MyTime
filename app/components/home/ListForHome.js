@@ -1,15 +1,37 @@
 import React from 'react'
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, FlatList, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Toast, ActivityIndicator, WingBlank } from 'antd-mobile';
-import pxToDp from '../utils/pxToDp'
-import theme from '../utils/theme'
+import pxToDp from '../../utils/pxToDp'
+import theme from '../../utils/theme'
 import Swiper from 'react-native-swiper';
 
 const ListForHome = (props)=> {
-  const { fetchData, navigation, isFull, isLoading, currentPage, isrefresh, didMount, imgData,  updateState } = props
-  console.log(props,'ListForHomeprops')
+  const { isFull, isLoading, currentPage, 
+    dataList, isrefresh, didMount, imgData } = props.home
+  const { navigate } = props.navigation
+  const fetchData = (page) => {
+    props.dispatch({
+      type: 'home/fetchData',
+      payload:{
+        page: page,
+        sort: 0,
+        categroyId: '',
+        bigCate: '',
+        userId: 1
+      }
+    })
+  }
+  
+  const updateState = (name,value)=> {
+    props.dispatch({
+      type: 'home/updateState',
+      payload: {
+        [name]: value
+      }
+    })
+  }
   const clickItem = (item)=> {
-    navigation.navigate('Detail',{item: item})
+    navigate('Detail',{item: item})
   }
   const renderItem = (item) => {
     return(
@@ -39,7 +61,7 @@ const ListForHome = (props)=> {
       </View>
     )
   }
-  //下拉加载
+  //上拉加载
   const fetchMore = ()=> {
     const page = currentPage + 1
     updateState('currentPage', page)
@@ -48,14 +70,13 @@ const ListForHome = (props)=> {
   }
   const renderHeader = ()=> {
     return(
-      
       <Swiper autoplay={true} style={styles.wrapper} >
         {
           didMount?
             imgData.map((item, index)=> {
               return(
                 <View key={index}>
-                  <Image source={{uri: item.img}} style={{height: pxToDp(200), resizeMode: 'center', width: WIDTH}}/>
+                  <Image source={{uri: item.img}} style={{height: pxToDp(400), width: theme.screenWidth}}/>
                 </View>  
               )
             }) : <View></View>
@@ -64,8 +85,13 @@ const ListForHome = (props)=> {
     )
   }
   const refresh = ()=> {
-    updateState('currentPage', 1)
-    updateState('isrefresh', true)
+    props.dispatch({
+      type: 'home/updateState',
+      payload: {
+        isrefresh: true,
+        currentPage: 1
+      }
+    })
     fetchData(1)
   }
   return(
@@ -74,7 +100,7 @@ const ListForHome = (props)=> {
       keyExtractor={item=> item.id}
       ItemSeparatorComponent={renderLine}
       ListFooterComponent={renderFooter}
-      ListHeaderComponent={renderHeader}
+      //ListHeaderComponent={renderHeader}
       onRefresh={refresh}
       refreshing={isrefresh}
       renderItem={({item, index}) => renderItem(item)}
