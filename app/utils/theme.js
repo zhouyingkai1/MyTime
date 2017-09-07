@@ -5,6 +5,7 @@ import pxToDp from './pxToDp';
 
 export default {
   //mainThemeColor: favoriteColor,
+  mainColor: '#108ee9',
   pageBackgroundColor: '#f4f4f4',
   screenHeight: Dimensions.get('window').height,
   screenWidth: Dimensions.get('window').width,

@@ -2,17 +2,9 @@ import React, { Component } from 'react'
 import {StyleSheet, View, WebView, Image, Dimensions, InteractionManager, StatusBar, Text, TouchableOpacity, ActivityIndicator, Alert, Linking, Clipboard, Modal, PanResponder, Animated, ToastAndroid} from 'react-native';
 import ParallaxScrollView from 'react-native-parallax-scroll-view';
 import pxToDp from '../utils/pxToDp'
+import NavigatorBar from '../components/common/NavigatorBar'
 const window = Dimensions.get('window');
 class Detail extends Component{
-  static navigationOptions = ({ navigation, screenProps })=>({
-    headerTitle: navigation.state.params.item.title || '详情页',
-    headerTitleStyle: { fontSize: 16, color:'white', fontWeight:'500'},
-    headerStyle: {backgroundColor:'#108ee9', shadowOpacity: 0},
-    headerTintColor: '#fff',
-    // headerBackTitleStyle:{
-    //   color: 'red'
-    // }
-  })
   constructor(props){
     super(props)
     this.state = {
@@ -70,22 +62,22 @@ class Detail extends Component{
     const { bottomInfoBarBottomValue } = this.state
     return(
       <View style={{flex: 1}}>
-        <StatusBar barStyle='light-content' />
+        <NavigatorBar barStyle='ligth-content' leftBtnText={true} title={params.items.title}/>
           
         <View style={[styles.container, {backgroundColor: '#f1f1f1'}]}>
           <View style={styles.contentContainer} {...this._panResponder.panHandlers}>
-              {this.state.didMount ?
-                <WebView
-                    ref={(ref)=>{this.webView = ref}}
-                    style={[styles.webView, {backgroundColor: '#f1f1f1'}]}
-                    source={{uri: params.item.url}}
-                    renderLoading={this._renderLoading.bind(this)}
-                    renderError={this._renderError.bind(this)}
-                    startInLoadingState={true}
-                />
-                :
-                null
-              }
+            {this.state.didMount ?
+              <WebView
+                ref={(ref)=>{this.webView = ref}}
+                style={[styles.webView, {backgroundColor: '#f1f1f1'}]}
+                source={{uri: params.item.url}}
+                renderLoading={this._renderLoading.bind(this)}
+                renderError={this._renderError.bind(this)}
+                startInLoadingState={true}
+              />
+              :
+              null
+            }
           </View>
           <Animated.View style={[styles.bottomInfoBar, {bottom: bottomInfoBarBottomValue, backgroundColor: '#f1f1f1', borderTopColor: '#e1e1e1'}]}>
             <View style={{flex: 1, alignItems: 'center'}}>

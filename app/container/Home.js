@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { View, Text, Dimensions, Image, TouchableOpacity, FlatList, StyleSheet, TextInput, StatusBar } from 'react-native'
 import { Toast, ActivityIndicator, Modal, WingBlank } from 'antd-mobile';
 import * as TestApi from '../services/testServices'
+import { NavigatorBar } from '../components/common/NavigatorBar' 
 import Swiper from 'react-native-swiper';
-
+import pxToDp from '../utils/pxToDp'
 const WIDTH = Dimensions.get('window').width;
 const data= [{
   id: 1,
@@ -138,13 +139,14 @@ class Home extends Component{
   }
   renderHeader() {
     return(
+      
       <Swiper autoplay={true} style={styles.wrapper} >
         {
           this.state.didMount?
             data.map((item, index)=> {
               return(
                 <View key={index}>
-                  <Image source={{uri: item.img}} style={{height: 200, width: WIDTH}}/>
+                  <Image source={{uri: item.img}} style={{height: pxToDp(200), resizeMode: 'center', width: WIDTH}}/>
                 </View>  
               )
             }) : <View></View>
@@ -160,7 +162,7 @@ class Home extends Component{
     const { dataList, isrefresh } = this.state
     return(
       <View> 
-        <StatusBar barStyle='light-content' />
+        <NavigatorBar barStyle='ligth-content' title='首页'/>
         <FlatList
           data={dataList}
           keyExtractor={item=> item.id}
@@ -191,23 +193,21 @@ class Home extends Component{
 }
 const styles = StyleSheet.create({
   icon: {
-    height: 30,
-    width: 30
+    height: pxToDp(60),
+    width: pxToDp(60)
   },
   header: {
-    height: 64,
+    height: pxToDp(128),
     backgroundColor:'#108ee9',
-    paddingTop: 18,
+    paddingTop: pxToDp(36),
   },
   img:{
     width: WIDTH,
-    height: 200,
-  },
-  modalImg: {
-    width: 400,
+    height: pxToDp(400),
+    resizeMode: 'center'
   },
   wrapper: {
-    height: 200,
+    height: pxToDp(400),
   },
   slide1: {
     flex: 1,

@@ -124,4 +124,4 @@ const thredBtn= {
   tintColor: '#108ee9'
 }
 
-export default connect((login)=> login)(Login)
+export default connect((state)=> {login: state.login})(Login)
