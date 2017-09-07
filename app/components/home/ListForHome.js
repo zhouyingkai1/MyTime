@@ -7,13 +7,13 @@ import Swiper from 'react-native-swiper';
 
 const ListForHome = (props)=> {
   const { fetchData, navigation, isFull, isLoading, currentPage, isrefresh, didMount, imgData,  updateState } = props
-  console.log(props,'props')
+  console.log(props,'ListForHomeprops')
   const clickItem = (item)=> {
     navigation.navigate('Detail',{item: item})
   }
   const renderItem = (item) => {
     return(
-      <TouchableOpacity style={{height: 60, justifyContent: 'center'}} onPress={()=> this.clickItem(item)}>
+      <TouchableOpacity style={{height: 60, justifyContent: 'center'}} onPress={()=> clickItem(item)}>
         {/* <Image source={{uri: item.img}} style={styles.img}/> */}
         <WingBlank size="lg">
           <Text>{item.title}</Text>
@@ -32,7 +32,7 @@ const ListForHome = (props)=> {
         {
           isFull? <Text>已为您加载全部</Text>: 
           <View style={{flexDirection: 'row', justifyContent: 'center'}}>
-            <ActivityIndicator size='small' color='red' animating={this.state.isLoading} />
+            <ActivityIndicator size='small' color='red' animating={isLoading} />
             <Text style={{color: 'red'}}>玩命加载中……</Text>
           </View>
         }
