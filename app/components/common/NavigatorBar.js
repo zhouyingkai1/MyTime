@@ -34,7 +34,6 @@ const NavigationBar = (props) =>{
     </View>
   );
 }
-
 const Button = (props)=> {
   return(
     <TouchableOpacity
