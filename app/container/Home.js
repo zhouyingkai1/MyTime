@@ -23,13 +23,7 @@ class Home extends Component{
   constructor(props){
     super(props)
   }
-  componentDidMount() {
-    this.props.dispatch({
-      type: 'home/updateState',
-      payload: {
-        didMount: true
-      }
-    })
+  componentDidMount() { 
     this.props.dispatch({
       type: 'home/fetchData',
       payload:{
@@ -41,7 +35,9 @@ class Home extends Component{
       }
     })
   }
-  
+  shouldComponentUpdate(nextProps) {
+    return this.props.home.dataList.length !== nextProps.home.dataList.length
+  }
   
   render(){
     return(

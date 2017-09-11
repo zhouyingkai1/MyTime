@@ -72,14 +72,13 @@ const ListForHome = (props)=> {
     return(
       <Swiper autoplay={true} style={styles.wrapper} >
         {
-          didMount?
             imgData.map((item, index)=> {
               return(
                 <View key={index}>
                   <Image source={{uri: item.img}} style={{height: pxToDp(400), width: theme.screenWidth}}/>
                 </View>  
               )
-            }) : <View></View>
+            }) 
         }
       </Swiper>
     )
@@ -100,7 +99,7 @@ const ListForHome = (props)=> {
       keyExtractor={item=> item.id}
       ItemSeparatorComponent={renderLine}
       ListFooterComponent={renderFooter}
-      //ListHeaderComponent={renderHeader}
+      ListHeaderComponent={renderHeader}
       onRefresh={refresh}
       refreshing={isrefresh}
       renderItem={({item, index}) => renderItem(item)}

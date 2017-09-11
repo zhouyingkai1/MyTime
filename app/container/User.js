@@ -19,6 +19,12 @@ class User extends Component{
   };
   constructor(props){
     super(props)
+    this.state={
+      isUpdate: false
+    }
+  }
+  shouldComponentUpdate(nextProps,nextStates){
+    return this.state.isUpdate !== nextStates.isUpdate
   }
   renderHedaer() {
     return(
@@ -35,9 +41,13 @@ class User extends Component{
         <List renderHeader={() => this.renderHedaer()}>
           <Item extra={'15'} >阅读</Item>
           <Item extra={'20'} >收藏</Item>
+          {
+            this.state.isUpdate?<Item extra={'20'} >收藏</Item>: null
+          }
+          
         </List> 
         <WingBlank size='sm'>
-          <Button onClick={()=> navigate('Login')}>退出登录</Button>
+          <Button onClick={()=> this.setState({isUpdate: !this.state.isUpdate})}>退出登录</Button>
         </WingBlank>
       </View>
     ) 
