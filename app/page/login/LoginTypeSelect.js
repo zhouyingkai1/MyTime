@@ -34,14 +34,14 @@ class LoginTypeSelect extends Component{
   render(){
     const { goBack, navigate } = this.props.navigation;
     return(
-      <View style={{flex: 1}}> 
-        <Image source={require('../../img/login_bg.jpg')} style={{width: theme.screenWidth, height: theme.screentHeight}}>
+      <View style={{flex: 1, backgroundColor: theme.pageBackgroundColor, height: theme.screentHeight}}> 
+        <Image source={require('../../img/login_bg.jpg')} style={{flex: 1, width: theme.screenWidth, height: theme.screentHeight}}>
           <View style={{flex: 1}}>
             <View style={styles.header}>
               <TouchableOpacity onPress={goBack} >
-                <Image source={require('../../img/icon_back.png')} style = {{width: px(48), height: 48, tintColor: '#3333'}}/>
+                <Image source={require('../../img/icon_back.png')} style = {{width: px(48), height: px(48), tintColor: '#3333'}}/>
               </TouchableOpacity>
-              <Text style={{flex: 1, alignItems: 'center', color: '#333', fontSize: px(28)}}>登录</Text>
+              <Text style={{flex: 1, textAlign: 'center',backgroundColor: 'transparent', alignItems: 'center', color: '#333', fontSize: px(32)}}>登录</Text>
               <View style={{width: px(48), height: px(48)}}></View>
             </View>
 
@@ -52,19 +52,19 @@ class LoginTypeSelect extends Component{
           </View>
 
           <View style={styles.thredLogin}>
-            <Text style={{fontSize: px(24), color: '#999'}}>其他登录方式</Text>
-            {
-              thredLoginIcon.map((item,index)=> {
-                return (
-                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}} key={index}>
-                    <TouchableOpacity onPress={()=> Toast.show(`${item.name}登录正在开发中`)} style={{alignItems: 'center'}}>
-                      <Image source={item.img} style={{width: px(60), marginBottom: px(10), height: px(60)}}/>
-                      <Text style={{color: '#999', fontSize: px(26)}}>{item.name}</Text>
-                    </TouchableOpacity>
-                  </View>
-                )
-              })
-            }
+            <Text style={{fontSize: px(24), backgroundColor: 'transparent', textAlign: 'center', color: '#999'}}>其他登录方式</Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around', marginTop: px(20) }}x>
+              {
+                thredLoginIcon.map((item,index)=> {
+                  return (
+                      <TouchableOpacity key={index} onPress={()=> Toast.show(`${item.name}登录正在开发中`)} style={{width: px(140), alignItems: 'center'}}>
+                        <Image source={item.img} style={{width: px(70), marginBottom: px(10), height: px(70)}}/>
+                        <Text style={{color: '#999', fontSize: px(26)}}>{item.name}</Text>
+                      </TouchableOpacity>
+                  )
+                })
+              }
+            </View>
           </View>
         </Image>
       </View>  
@@ -77,11 +77,11 @@ const styles = StyleSheet.create({
     paddingTop: theme.toolbar.paddingTop,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft: px(30), 
-    paddingRight: px(30) 
+    paddingLeft: px(20), 
+    paddingRight: px(20) 
   },
   button: {
-    marginTop: px(278),
+    marginTop: px(328),
     paddingLeft: px(40),
     paddingRight: px(40)
   },
@@ -89,21 +89,23 @@ const styles = StyleSheet.create({
     borderRadius: px(42),
     height: px(84),
     borderWidth: theme.segment.width,
-    borderColor: theme.mainColor,
+    borderColor: theme.themeColor,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buttonText: {
-    color: theme.mainColor,
-    fontSize: px(28)
+    color: theme.themeColor,
+    fontSize: px(28),
+    backgroundColor: 'transparent',
   },
   thredLogin: {
-    height: px(240),
+    height: px(190),
     paddingLeft: px(20),
     paddingRight: px(20)
   }
 })
 const mapStateToProps = state => ({
   login: state.login,
+  app: state.app
 });
 export default connect(mapStateToProps)(LoginTypeSelect)

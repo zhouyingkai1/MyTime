@@ -56,15 +56,15 @@ class Home extends Component {
       }}>
         {/* <NavigatorBar barStyle='light-content' title='首页'/> */}
         <Button
-          onClick={this.props.navigation.navigate('LoginTypeSelect')}></Button>
+          onClick={()=> this.props.navigation.navigate('LoginTypeSelect')}>登录写的真烂</Button>
 
-        {/* <View style={{flex: 1}}>
+        <View style={{flex: 1}}>
           <ScrollableTabView>
             <ListForHome tabLabel="React" fetchData={this.fetchData} updateState={this.updateState} {...this.props}/>
             <Text tabLabel="Flow">flow</Text>
             <Text tabLabel="Jest">jest</Text>
           </ScrollableTabView>
-        </View>   */}
+        </View>  
       </View>
     )
   }

@@ -16,6 +16,7 @@ function checkStatus(response) {
 }
 
 function handleError(error) {
+  console.log(error,'ddd')
   if (error.response && error.response.status) {
     return{
       code: error.response && error.response.status,
@@ -52,13 +53,12 @@ export default function request(url, options) {
 }
 export function getRequest(url) {
   url  = /http:\\/.test(url) ? url : pathInterceptor.request(url)
-  return fetch(url, { 
-    method: 'GET',
-  }).then(checkStatus)
-    .then((data) => {
-      return data.text()
-    }).then(result=>{  
-      return JSON.parse(result) 
-    })
+  console.log(url,'sss')
+  return fetch(url,{
+    method: 'GET'
+  })
+    .then(checkStatus)
+    .then(data=> data.text())
+    .then((data) => JSON.parse(data))
     .catch((err) => handleError(err));
-}
+  }

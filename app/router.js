@@ -58,7 +58,6 @@ const AppNavigator = StackNavigator({
 
 const StackOptions = ({navigation}) => {
   let {state,goBack} = navigation;
-  console.log(navigation,'navigation')
   const headerStyle = {backgroundColor: theme.themeColor, paddingTop: theme.toolbar.paddingTop};
   const headerTitle = state.params ? state.params.title : state.routeName;
 
@@ -71,7 +70,7 @@ const StackOptions = ({navigation}) => {
   const headerBackTitle = false;
   const headerLeft = (
       <TouchableOpacity>
-        <Image source={require('./img/icon_back.png')} style={{width: px(60), height: px(60), tintColor: '#fff'}}/>
+        <Image source={require('./img/icon_back.png')} style={{width: px(48), height: px(48), tintColor: '#fff'}}/>
       </TouchableOpacity>
   );
   let headerRight;

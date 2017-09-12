@@ -17,9 +17,18 @@ class LoginByPhone extends Component{
   }
   // 手机号登录
   login = ()=> {
+    
+    var phone = this.refs.phone._lastNativeText
+    var password = this.refs.password._lastNativeText
+    if(!phone||!password){
+      return Toast.show('账号或密码不得为空')
+    }
     this.props.dispatch({
       type: 'login/loginByPhone',
-      payload: {}
+      payload: {
+        phone,
+        password
+      }
     })
   }
   //
@@ -39,7 +48,7 @@ class LoginByPhone extends Component{
     const { navigate } = this.props.navigation;
     
     return(
-      <View styles={{flex: 1, backgroundColor: theme.pageBackgroundColor, paddingLeft: px(30), paddingRight: px(30)}}> 
+      <View style={{flex: 1, backgroundColor: theme.pageBackgroundColor, paddingLeft: px(30), paddingRight: px(30)}}> 
         <View style={[styles.item,{marginTop: px(20)}]}>
           <View style={styles.icon}></View>
           <TextInput 
@@ -47,24 +56,24 @@ class LoginByPhone extends Component{
             placeholder='请输入手机号'
             numberOfLines={1} 
             keyboardType='numeric' 
-            onChange={(value)=> this.handleInput(value,'phone')} 
-            autoCapitalize={false} 
+            ref="phone"
+            autoCapitalize='none' 
             autoFocus={true}/>
         </View>
         <View style={styles.item}>
           <View style={styles.icon}></View>
           <TextInput
             numberOfLines={1}
-            onChange={(value)=> this.handleInput(value,'password')} 
             placeholder='请输入密码'
-            autoCapitalize={false}
+            ref="password"
+            autoCapitalize='none'
             secureTextEntry={true}
             style={styles.input}/>
         </View>
-        <View style={{marginTop: px(60), marginBottom: px(60)}}>
-          <MyButton text='登录' onPress={()=> this.login()} touchStyle={[styles.buttonBox,{marginBottom: px(20)}]} textStyle={styles.buttonText} />
+        <View style={{marginTop: px(60), marginBottom: px(40)}}>
+          <MyButton text='登录' onPress={()=> this.login()} touchStyle={[styles.buttonBox,]} textStyle={styles.buttonText} />
         </View>
-        <MyButton text='重设密码' onPress={()=> this.login()} text={{textDecorationLine: 'underline', textDecorationStyle: 'solid', textDecorationColor: '#333', color: '#666'}}/>
+        <MyButton text='重设密码' onPress={()=> this.login()} textStyle={{textDecorationLine: 'underline', textAlign: 'center', textDecorationStyle: 'solid', textDecorationColor: '#333', color: '#666'}}/>
       </View>  
     ) 
   }
@@ -84,7 +93,8 @@ const styles = StyleSheet.create({
   },
   input: {
     height: px(90),
-    borderWidth: 0
+    borderWidth: 0,
+    flex: 1
   },
   buttonBox: {
     borderRadius: px(42),
@@ -95,8 +105,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   buttonText: {
-    color: '#333',
-    fontSize: px(28)
+    color: theme.themeColor,
+    fontSize: px(28),
   },
 })
 const mapStateToProps = state => ({
