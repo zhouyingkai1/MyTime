@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { BackHandler, Animated, Easing, TouchableOpacity, Image } from 'react-native'
+import { BackHandler, AsyncStorage, Animated, Easing, TouchableOpacity, Image } from 'react-native'
+import Storage from 'react-native-storage';
 import theme from './utils/theme'
 import px from './utils/pxToDp'
 import { 
@@ -126,5 +127,15 @@ class Router extends PureComponent {
 export function routerReducer(state, action = {}) {
   return AppNavigator.router.getStateForAction(action, state)
 }
+
+global.storage = new Storage({
+  size: 1000,
+  storageBackend: AsyncStorage,
+    
+  // 数据过期时间，默认一整天（1000 * 3600 * 24 毫秒），设为null则永不过期
+  defaultExpires: null,
+    
+  enableCache: true,
+})  
 
 export default connect((router)=> router)(Router)

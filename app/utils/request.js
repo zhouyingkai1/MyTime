@@ -50,3 +50,15 @@ export default function request(url, options) {
     })
     .catch((err) => handleError(err));
 }
+export function getRequest(url) {
+  url  = /http:\\/.test(url) ? url : pathInterceptor.request(url)
+  return fetch(url, { 
+    method: 'GET',
+  }).then(checkStatus)
+    .then((data) => {
+      return data.text()
+    }).then(result=>{  
+      return JSON.parse(result) 
+    })
+    .catch((err) => handleError(err));
+}

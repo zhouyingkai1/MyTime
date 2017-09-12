@@ -1,6 +1,5 @@
 import { createAction, NavigationActions } from '../utils'
 import * as testService from '../services/testServices'
-import px from '../utils/pxToDp'
 export default {
   namespace: 'app',
   state: {

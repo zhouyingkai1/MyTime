@@ -16,7 +16,20 @@ class LoginByPhone extends Component{
   }
   // 手机号登录
   login = ()=> {
-    Toast.show('账号或密码不正确')
+    this.props.dispatch({
+      type: 'login/loginByPhone',
+      payload: {}
+    })
+  }
+  //
+  handleInput = (value, type)=> {
+    console.log(this,'dthisssssss')
+    this.props.dispatch({
+      type: 'login/updateState',
+      payload: {
+        [type]: value
+      }
+    })
   }
   render(){
     const { navigate } = this.props.navigation;
@@ -29,7 +42,7 @@ class LoginByPhone extends Component{
             placeholder='请输入手机号'
             numberOfLines={1} 
             keyboardType='numeric' 
-            onChange={(e)=> Toast.show(e)} 
+            onChange={(value)=> this.handleInput(value,'phone')} 
             autoCapitalize={false} 
             autoFocus={true}/>
         </View>
@@ -37,6 +50,7 @@ class LoginByPhone extends Component{
           <View style={styles.icon}></View>
           <TextInput
             numberOfLines={1}
+            onChange={(value)=> this.handleInput(value,'password')} 
             placeholder='请输入密码'
             autoCapitalize={false}
             secureTextEntry={true}
