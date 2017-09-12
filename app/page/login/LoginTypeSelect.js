@@ -32,7 +32,7 @@ class LoginTypeSelect extends Component{
   }
  
   render(){
-    const { goBack } = this.props.navigation;
+    const { goBack, navigate } = this.props.navigation;
     return(
       <View> 
         <Image source={requier('../../img/login_bg.jpg')} style={{width: theme.screenWidth, height: theme.screentHeight}}>
@@ -46,8 +46,8 @@ class LoginTypeSelect extends Component{
             </View>
 
             <View style={styles.button}>
-              <MyButton text='手机号登录' onPress={()=> console.log(1)} touchStyle={[styles.buttonBox,{marginBottom: px(20)}]} text={styles.buttonText} />
-              <MyButton text='注册' onPress={()=> console.log(2)} touchStyle={styles.buttonBox} text={styles.buttonText}/>
+              <MyButton text='手机号登录' onPress={()=> navigate('LoginByPhone')} touchStyle={[styles.buttonBox,{marginBottom: px(20)}]} textStyle={styles.buttonText} />
+              <MyButton text='注册' onPress={()=> console.log(2)} touchStyle={styles.buttonBox} textStyle={styles.buttonText}/>
             </View>
           </View>
 
@@ -81,13 +81,13 @@ const styles = StyleSheet.create({
     paddingRight: px(30) 
   },
   button: {
-    marginTop: px(298),
+    marginTop: px(278),
     paddingLeft: px(40),
     paddingRight: px(40)
   },
   buttonBox: {
-    borderRadius: px(40),
-    height: px(60),
+    borderRadius: px(42),
+    height: px(84),
     borderWidth: theme.segment.width,
     borderColor: theme.mainColor,
     justifyContent: 'center',

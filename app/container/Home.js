@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import { Toast } from 'antd-mobile';
+import { Toast, Button } from 'antd-mobile';
 import { NavigatorBar, ListForHome } from '../components' 
 import pxToDp from '../utils/pxToDp'
 import { connect } from 'react-redux'
@@ -40,6 +40,7 @@ class Home extends Component{
     return(
       <View style={{flex: 1, backgroundColor: '#f1f1f1'}}> 
         {/* <NavigatorBar barStyle='light-content' title='首页'/> */}
+        <Button onClick={this.props.navigation.navigate('LoginTypeSelect')}></Button>
         <View style={{flex: 1}}>
           <ScrollableTabView>
             <ListForHome tabLabel="React" fetchData={this.fetchData} updateState={this.updateState} {...this.props}/>

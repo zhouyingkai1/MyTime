@@ -6,7 +6,8 @@ import pxToDp from './pxToDp';
 export default {
   //mainThemeColor: favoriteColor,
   mainColor: '#e72b2b',
-  pageBackgroundColor: '#f4f4f4',
+  themeColor: '#10e951',
+  pageBackgroundColor: '#fbfcfd',
   screenHeight: Dimensions.get('window').height,
   screenWidth: Dimensions.get('window').width,
   touchableHighlightUnderlayColor: 'rgba(0,0,0,.4)',
