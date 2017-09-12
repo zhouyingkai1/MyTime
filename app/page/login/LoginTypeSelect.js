@@ -34,8 +34,8 @@ class LoginTypeSelect extends Component{
   render(){
     const { goBack, navigate } = this.props.navigation;
     return(
-      <View> 
-        <Image source={requier('../../img/login_bg.jpg')} style={{width: theme.screenWidth, height: theme.screentHeight}}>
+      <View style={{flex: 1}}> 
+        <Image source={require('../../img/login_bg.jpg')} style={{width: theme.screenWidth, height: theme.screentHeight}}>
           <View style={{flex: 1}}>
             <View style={styles.header}>
               <TouchableOpacity onPress={goBack} >
@@ -52,13 +52,13 @@ class LoginTypeSelect extends Component{
           </View>
 
           <View style={styles.thredLogin}>
-            <Text style={{fontSize: px(24), coloc: '#999'}}>其他登录方式</Text>
+            <Text style={{fontSize: px(24), color: '#999'}}>其他登录方式</Text>
             {
               thredLoginIcon.map((item,index)=> {
                 return (
-                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-round', alignItems: 'center'}} key={index}>
+                  <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}} key={index}>
                     <TouchableOpacity onPress={()=> Toast.show(`${item.name}登录正在开发中`)} style={{alignItems: 'center'}}>
-                      <Image source={item.img} styles={{width: px(60), marginBottom: px(10), height: px(60)}}/>
+                      <Image source={item.img} style={{width: px(60), marginBottom: px(10), height: px(60)}}/>
                       <Text style={{color: '#999', fontSize: px(26)}}>{item.name}</Text>
                     </TouchableOpacity>
                   </View>
@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
     height: theme.toolbar.height,
     paddingTop: theme.toolbar.paddingTop,
     flexDirection: 'row',
-    alignItems: 'cneter',
+    alignItems: 'center',
     paddingLeft: px(30), 
     paddingRight: px(30) 
   },

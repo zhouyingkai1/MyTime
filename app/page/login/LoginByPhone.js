@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     paddingLeft: px(10),
     height: px(90),
     alignItems: 'center',
-    borderBottonWidth: theme.segment.width,
-    borderBottonWidth: theme.segment.color,
+    borderBottomWidth: theme.segment.width,
+    borderBottomColor: theme.segment.color,
   },
   icon: {
     width: px(40),
