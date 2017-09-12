@@ -15,7 +15,7 @@ export default{
       const result = yield call(loginServices.loginByPhone,`phone=${phone}&&password=${password}`)
       if(result.code == '200'){
         storage.save({
-          key: 'userInfo',  // 注意:请不要在key中使用_下划线符号!
+          key: 'userInfo',  
           data: result,
           expires: null
         });

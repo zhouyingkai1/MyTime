@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, TextInput, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, TextInput, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
 import { Toast } from 'antd-mobile';
 import px from '../../utils/pxToDp'
 import { connect } from 'react-redux'
@@ -10,6 +10,7 @@ class LoginByPhone extends Component{
     super(props)
   }
   componentDidMount() { 
+    StatusBar.setBarStyle('light-content')
     this.props.navigation.setParams({
       title: '手机号登录'
     });
@@ -31,8 +32,12 @@ class LoginByPhone extends Component{
       }
     })
   }
+  componentWillUnmount() {
+    StatusBar.setBarStyle('default')
+  }
   render(){
     const { navigate } = this.props.navigation;
+    
     return(
       <View styles={{flex: 1, backgroundColor: theme.pageBackgroundColor, paddingLeft: px(30), paddingRight: px(30)}}> 
         <View style={[styles.item,{marginTop: px(20)}]}>
