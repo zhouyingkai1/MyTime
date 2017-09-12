@@ -12,7 +12,10 @@ import {
 } from 'react-navigation';
 import { connect } from 'react-redux'
 
-import HomeScreen from './container/Home'
+import Home from './container/Home'
+import User from './container/User'
+import Friends from './container/Friends'
+import MyMusic from './container/MyMusic'
 import UserScreen from './container/User'
 import Detail from './page/Detail'
 import UserDetail from './page/UserDetail'
@@ -20,8 +23,10 @@ import LoginTypeSelect from './page/login/LoginTypeSelect'
 import LoginByPhone from './page/login/LoginByPhone'
 
 const TabBar = TabNavigator({
-  Home: { screen: HomeScreen },
-  User: { screen: UserScreen },
+  Home: { screen: Home },
+  User: { screen: User },
+  Friends: { screen: Friends },
+  MyMusic: { screen: MyMusic },
 },{
   tabBarOptions: {
     swipeEnabled: false,

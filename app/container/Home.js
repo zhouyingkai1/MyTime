@@ -21,7 +21,7 @@ class Home extends Component {
     tabBarLabel: '首页',
     header: null,
     tabBarIcon: ({tintColor}) => (<Image
-      source={require('../img/home.png')}
+      source={require('../img/icon_login.png')}
       style={[
       styles.icon, {
         tintColor: tintColor
