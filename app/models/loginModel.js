@@ -1,7 +1,7 @@
 export default{
   namespace: 'login',
   state: {
-    
+    loginType: 1,
   },
   effects: {
 

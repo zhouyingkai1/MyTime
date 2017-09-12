@@ -13,19 +13,23 @@ import HomeScreen from './container/Home'
 import UserScreen from './container/User'
 import Detail from './page/Detail'
 import UserDetail from './page/UserDetail'
-import Login from './page/Login'
+import LoginTypeSelect from './page/login/LoginTypeSelect'
 
 const TabBar = TabNavigator({
   Home: { screen: HomeScreen },
   User: { screen: UserScreen },
 },{
   tabBarOptions: {
-    inactiveTintColor: '#333',
-    swipeEnabled: true,
-    labelStyle: {
-      fontSize: 12,
-      marginBottom: 5,
-    },
+    swipeEnabled: false,
+    tabBarPosition: 'bottom',
+    lazy: true,
+    tabBarOptions: {
+      labelStyle: {
+        fontSize: 12,
+        marginBottom: 5,
+      },
+      inactiveTintColor: '#333',
+    }
   }
 });
 // headerMode
@@ -37,8 +41,8 @@ const AppNavigator = StackNavigator({
   UserDetail: { 
     screen: UserDetail, 
   },
-  Login: {
-    screen: Login,
+  LoginTypeSelect: {
+    screen: LoginTypeSelect,
   }
 },{
   headerMode : 'screen'

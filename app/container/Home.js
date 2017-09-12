@@ -35,10 +35,7 @@ class Home extends Component{
       }
     })
   }
-  shouldComponentUpdate(nextProps) {
-    return this.props.home.dataList.length !== nextProps.home.dataList.length
-  }
-  
+ 
   render(){
     return(
       <View style={{flex: 1, backgroundColor: '#f1f1f1'}}> 
@@ -60,5 +57,7 @@ const styles = StyleSheet.create({
     width: pxToDp(60)
   },
 })
-
-export default connect((state)=> state)(Home)
+const mapStateToProps = state => ({
+  home: state.home,
+});
+export default connect(mapStateToProps)(Home)

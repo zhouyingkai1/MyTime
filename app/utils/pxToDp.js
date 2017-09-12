@@ -4,7 +4,7 @@ import {Dimensions} from 'react-native';
 
 const deviceWidthDp = Dimensions.get('window').width;
 // 默认设计图宽度750
-const uiWidthPx = 750;
+const uiWidthPx = 640;
 
 function pxToDp(uiElementPx) {
   return uiElementPx *  deviceWidthDp / uiWidthPx;

@@ -1,11 +1,10 @@
 import { createAction, NavigationActions } from '../utils'
 import * as testService from '../services/testServices'
-
+import px from '../utils/pxToDp'
 export default {
   namespace: 'app',
   state: {
-    fetching: false,
-    login: false,
+    primaryColor: '#333',
   },
   reducers: {
     loginStart(state, { payload }) {
@@ -14,6 +13,9 @@ export default {
     loginEnd(state, { payload }) {
       return { ...state, ...payload, fetching: false }
     },
+    updateState(state, { payload }) {
+      return { ...state, ...payload }
+    }
   },
   effects: {
     *login({ payload }, { call, put }) {
