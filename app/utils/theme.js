@@ -23,8 +23,8 @@ export default {
     height: Platform.OS === 'android' ? pxToDp(100) : pxToDp(90),
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : pxToDp(30),
     //barColor: favoriteColor,
-    titleColor: '#fff',
-    titleSize: Platform.OS === 'android' ? pxToDp(40) : pxToDp(34),
-    textBtnSize: Platform.OS === 'android' ? pxToDp(24) : pxToDp(22)
+    // titleColor: '#fff',
+    // titleSize: Platform.OS === 'android' ? pxToDp(40) : pxToDp(34),
+    // textBtnSize: Platform.OS === 'android' ? pxToDp(24) : pxToDp(22)
   }
 }

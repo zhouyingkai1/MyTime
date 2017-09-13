@@ -21,7 +21,7 @@ const thredLoginIcon = [
   },
 ]
 class LoginTypeSelect extends Component{
-  static navigationOptions = ({ navigation, screenProps })=>({
+  static navigationOptions = ()=>({
     header: null,
   })
   constructor(props){

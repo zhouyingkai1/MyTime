@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, TextInput, StyleSheet, TouchableOpacity, StatusBar } from 'react-native'
-import { Toast } from 'antd-mobile';
+import { Toast, Button } from 'antd-mobile';
 import px from '../../utils/pxToDp'
 import { connect } from 'react-redux'
 import theme from '../../utils/theme'
@@ -71,7 +71,8 @@ class LoginByPhone extends Component{
             style={styles.input}/>
         </View>
         <View style={{marginTop: px(60), marginBottom: px(40)}}>
-          <MyButton text='登录' onPress={()=> this.login()} touchStyle={[styles.buttonBox,]} textStyle={styles.buttonText} />
+          <Button activeStyle={{backgroundColor: theme.themeColor, color: '#fff'}} style={styles.loginBtn} onClick={this.login()}>登录</Button>
+          <MyButton text='登录'  touchStyle={[styles.buttonBox,]} textStyle={styles.buttonText} />
         </View>
         <MyButton text='重设密码' onPress={()=> this.login()} textStyle={{textDecorationLine: 'underline', textAlign: 'center', textDecorationStyle: 'solid', textDecorationColor: '#333', color: '#666'}}/>
       </View>  
@@ -96,18 +97,29 @@ const styles = StyleSheet.create({
     borderWidth: 0,
     flex: 1
   },
-  buttonBox: {
+  loginBtn: {
     borderRadius: px(42),
     height: px(84),
     borderWidth: theme.segment.width,
     borderColor: theme.themeColor,
     justifyContent: 'center',
-    alignItems: 'center'
-  },
-  buttonText: {
+    alignItems: 'center',
     color: theme.themeColor,
     fontSize: px(28),
+    backgroundColor: 'transparent'
   },
+  // buttonBox: {
+  //   borderRadius: px(42),
+  //   height: px(84),
+  //   borderWidth: theme.segment.width,
+  //   borderColor: theme.themeColor,
+  //   justifyContent: 'center',
+  //   alignItems: 'center'
+  // },
+  // buttonText: {
+  //   color: theme.themeColor,
+  //   fontSize: px(28),
+  // },
 })
 const mapStateToProps = state => ({
   login: state.login,

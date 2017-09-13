@@ -3,10 +3,13 @@ import NavigatorBar from './common/NavigatorBar'
 import ListForHome from './home/ListForHome'
 import MyButton from './common/MyButton'
 
+//首页 发现音乐相关组件
+import NavigatorForHome from './home/NavigatorForHome'
 
 module.exports={
   ImageBtn,
   ListForHome,
   NavigatorBar,
-  MyButton
+  MyButton,
+  NavigatorForHome
 }

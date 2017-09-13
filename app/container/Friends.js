@@ -18,7 +18,7 @@ class Friends extends Component{
   };
   constructor(props){
     super(props)
-    
+     
   }
   
   render(){
