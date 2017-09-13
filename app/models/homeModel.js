@@ -3,7 +3,7 @@ import * as homeServices from '../services/homeServices'
 export default{
   namespace: 'home',
   state: {
-
+    isSearch: false
   },
   effects: {
     *getPersonalized({payload}, {call, put}) {

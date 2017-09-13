@@ -5,11 +5,13 @@ import MyButton from './common/MyButton'
 
 //首页 发现音乐相关组件
 import NavigatorForHome from './home/NavigatorForHome'
+import Recommend from './home/Recommend'
 
 module.exports={
   ImageBtn,
   ListForHome,
   NavigatorBar,
   MyButton,
-  NavigatorForHome
+  NavigatorForHome,
+  Recommend
 }

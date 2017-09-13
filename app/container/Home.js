@@ -1,11 +1,11 @@
 import React, {Component} from 'react'
 import { View, StyleSheet, ScrollView, InteractionManager } from 'react-native'
 import {Toast, Button } from 'antd-mobile';
-import { NavigatorForHome } from '../components'
+import { NavigatorForHome, Recommend } from '../components'
 import px from '../utils/pxToDp'
 import {connect} from 'react-redux'
 import theme from '../utils/theme'
-// import ScrollableTabView from 'react-native-scrollable-tab-view'
+import ScrollableTabView from 'react-native-scrollable-tab-view'
 
 class Home extends Component {
   static navigationOptions = {
@@ -43,12 +43,21 @@ class Home extends Component {
   }
 
   render() {
+    const { isSearch } = this.props.home
     return (
       <View style={{ flex: 1, backgroundColor: '#f1f1f1' }}>
         <NavigatorForHome {...this.props}/>
-        <ScrollView style={{flex: 1}}>
-
-        </ScrollView>
+        <ScrollableTabView
+          tabBarUnderlineStyle={{backgroundColor: theme.themeColor}}
+          tabBarActiveTextColor={theme.themeColor}
+          tabBarInactiveTextColor='#333'
+          style={{backgroundColor: 'rgba(200,200,200,.7)'}}
+        >
+          <Recommend tabLabel="个性推荐" {...this.props}/>
+          <Text tabLabel="歌单">歌单</Text>
+          <Text tabLabel="主播电台">主播电台</Text>
+          <Text tabLabel="排行榜">排行榜</Text>
+        </ScrollableTabView>
       </View>
     )
   }

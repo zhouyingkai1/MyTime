@@ -28,16 +28,19 @@ const TabBar = TabNavigator({
   Friends: { screen: Friends },
   MyMusic: { screen: MyMusic },
 },{
+  swipeEnabled: false,
+  tabBarPosition: 'bottom',
+  lazy: true,
   tabBarOptions: {
-    swipeEnabled: false,
-    tabBarPosition: 'bottom',
-    lazy: true,
-    tabBarOptions: {
-      labelStyle: {
-        fontSize: 12,
-        marginBottom: 5,
-      },
-      inactiveTintColor: '#333',
+    labelStyle: {
+      fontSize: 12,
+      marginBottom: 5,
+    },
+    showIcon:true,
+    upperCaseLabel:false,
+    inactiveTintColor: '#333',
+    style: {
+      backgroundColor: 'rgba(0,0,0,.7)'
     }
   }
 });
