@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {View, Text, Image, StyleSheet} from 'react-native'
+import { View, Text, Image, StyleSheet, InteractionManager } from 'react-native'
 import {Toast, Button} from 'antd-mobile';
 import {NavigatorBar, ListForHome} from '../components'
 import pxToDp from '../utils/pxToDp'
@@ -18,10 +18,10 @@ class Home extends Component {
       backgroundColor: '#108ee9',
       shadowOpacity: 0
     },
-    tabBarLabel: '首页',
+    tabBarLabel: '发现音乐',
     header: null,
     tabBarIcon: ({tintColor}) => (<Image
-      source={require('../img/icon_login.png')}
+      source={require('../img/icon_logo.png')}
       style={[
       styles.icon, {
         tintColor: tintColor
@@ -32,20 +32,22 @@ class Home extends Component {
     super(props)
   }
   componentDidMount() {
-    storage.load({
-      key: 'userInfo'
-     }).then(ret => {
-        console.log(ret);
-      }).catch(err => {
-        switch (err.name) {
-          case 'NotFoundError':
-            console.log('NotFoundError')
-            break;
-          case 'ExpiredError':
-            // TODO
-            break;
-        }
-      })
+    InteractionManager.runAfterInteractions(()=>{
+      storage.load({
+        key: 'userInfo'
+       }).then(ret => {
+          console.log(ret);
+        }).catch(err => {
+          switch (err.name) {
+            case 'NotFoundError':
+              console.log('NotFoundError')
+              break;
+            case 'ExpiredError':
+              // TODO
+              break;
+          }
+        })
+    })
   }
 
   render() {
