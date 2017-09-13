@@ -17,7 +17,6 @@ class LoginByPhone extends Component{
   }
   // 手机号登录
   login = ()=> {
-    
     var phone = this.refs.phone._lastNativeText
     var password = this.refs.password._lastNativeText
     if(!phone||!password){
@@ -71,8 +70,7 @@ class LoginByPhone extends Component{
             style={styles.input}/>
         </View>
         <View style={{marginTop: px(60), marginBottom: px(40)}}>
-          <Button activeStyle={{backgroundColor: theme.themeColor, color: '#fff'}} style={styles.loginBtn} onClick={this.login()}>登录</Button>
-          <MyButton text='登录'  touchStyle={[styles.buttonBox,]} textStyle={styles.buttonText} />
+          <MyButton text='登录'  onPress={()=> this.login()} touchStyle={styles.buttonBox} textStyle={styles.buttonText} />
         </View>
         <MyButton text='重设密码' onPress={()=> this.login()} textStyle={{textDecorationLine: 'underline', textAlign: 'center', textDecorationStyle: 'solid', textDecorationColor: '#333', color: '#666'}}/>
       </View>  
@@ -108,18 +106,18 @@ const styles = StyleSheet.create({
     fontSize: px(28),
     backgroundColor: 'transparent'
   },
-  // buttonBox: {
-  //   borderRadius: px(42),
-  //   height: px(84),
-  //   borderWidth: theme.segment.width,
-  //   borderColor: theme.themeColor,
-  //   justifyContent: 'center',
-  //   alignItems: 'center'
-  // },
-  // buttonText: {
-  //   color: theme.themeColor,
-  //   fontSize: px(28),
-  // },
+  buttonBox: {
+    borderRadius: px(42),
+    height: px(84),
+    borderWidth: theme.segment.width,
+    borderColor: theme.themeColor,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonText: {
+    color: theme.themeColor,
+    fontSize: px(28),
+  },
 })
 const mapStateToProps = state => ({
   login: state.login,

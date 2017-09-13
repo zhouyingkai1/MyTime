@@ -20,7 +20,7 @@ export default {
     normalColor: '#aaa'
   },
   toolbar: {
-    height: Platform.OS === 'android' ? pxToDp(100) : pxToDp(90),
+    height: Platform.OS === 'android' ? pxToDp(100) : pxToDp(128),
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : pxToDp(30),
     //barColor: favoriteColor,
     // titleColor: '#fff',

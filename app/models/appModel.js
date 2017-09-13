@@ -1,5 +1,4 @@
 import { createAction, NavigationActions } from '../utils'
-import * as testService from '../services/testServices'
 export default {
   namespace: 'app',
   state: {
@@ -18,17 +17,17 @@ export default {
   },
   effects: {
     *login({ payload }, { call, put }) {
-      yield put(createAction('loginStart')())
-      const login = yield call(testService.login, payload)
-      if (login) {
-        yield put(
-          NavigationActions.reset({
-            index: 0,
-            actions: [NavigationActions.navigate({ routeName: 'Main' })],
-          })
-        )
-      }
-      yield put(createAction('loginEnd')({ login }))
+      // yield put(createAction('loginStart')())
+      // const login = yield call(testService.login, payload)
+      // if (login) {
+      //   yield put(
+      //     NavigationActions.reset({
+      //       index: 0,
+      //       actions: [NavigationActions.navigate({ routeName: 'Main' })],
+      //     })
+      //   )
+      // }
+      // yield put(createAction('loginEnd')({ login }))
     },
   },
 }

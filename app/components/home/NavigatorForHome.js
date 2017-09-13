@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity, Animated } from 'react-native'
+import { View, StyleSheet, Image, TouchableOpacity, Animated } from 'react-native'
 import { SearchBar, Toast } from 'antd-mobile'
 import theme from '../../utils/theme'
 import px from '../../utils/pxToDp'
@@ -27,12 +27,12 @@ const NavigatorForHome = (props)=> {
       {
         !isSearch?
         <TouchableOpacity style={styles.iconBtn} onPress={()=> Toast.show('mic')}>
-          <Image source={require('../../img/icon_mic')} style={{width: px(48), height: px(48), tintColor: '#fff'}}/>
+          <Image source={require('../../img/icon_mic.png')} style={{width: px(48), height: px(48), tintColor: '#fff'}}/>
         </TouchableOpacity> : null
       }
-      <View style={{flex: 1}} onLayout={(x,y)=> console.log(x,'获取view宽度')}>
+      <View style={{flex: 1}}>
        <SearchBar 
-        style={{height: px(60),borderRadius: px(30), backgroundColor: 'transparent'}}
+        //style={{height: px(60),borderRadius: px(30), backgroundColor: 'transparent'}}
         placeholder="搜索音乐、歌词、电台" 
         onSubmit={(val)=> handleSearch(val)}
         onFocus={()=> handleFocus()}
@@ -42,7 +42,7 @@ const NavigatorForHome = (props)=> {
       {
         !isSearch?
         <TouchableOpacity style={styles.iconBtn} onPress={()=> Toast.show('icon_music')}>
-          <Image source={require('../../img/icon_music')} style={{width: px(48), height: px(48), tintColor: '#fff'}}/>
+          <Image source={require('../../img/icon_sound.png')} style={{width: px(40), height: px(40), tintColor: '#fff'}}/>
         </TouchableOpacity> : null
       }
     </View>

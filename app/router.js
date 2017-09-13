@@ -24,9 +24,9 @@ import LoginByPhone from './page/login/LoginByPhone'
 
 const TabBar = TabNavigator({
   Home: { screen: Home },
-  User: { screen: User },
-  Friends: { screen: Friends },
   MyMusic: { screen: MyMusic },
+  Friends: { screen: Friends },
+  User: { screen: User },
 },{
   swipeEnabled: false,
   tabBarPosition: 'bottom',
@@ -38,9 +38,10 @@ const TabBar = TabNavigator({
     },
     showIcon:true,
     upperCaseLabel:false,
-    inactiveTintColor: '#333',
+    inactiveTintColor: '#999',
+    activeTintColor: '#fff',
     style: {
-      backgroundColor: 'rgba(0,0,0,.7)'
+      backgroundColor: 'rgba(0,0,0,.8)',
     }
   }
 });

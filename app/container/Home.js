@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { View, StyleSheet, ScrollView, InteractionManager } from 'react-native'
+import { View, StyleSheet, Text, Image, ScrollView, InteractionManager } from 'react-native'
 import {Toast, Button } from 'antd-mobile';
 import { NavigatorForHome, Recommend } from '../components'
 import px from '../utils/pxToDp'
@@ -32,7 +32,6 @@ class Home extends Component {
         }).catch(err => {
           switch (err.name) {
             case 'NotFoundError':
-              this.props.navigation.navigate('LoginTypeSelect')
               break;
             case 'ExpiredError':
               // TODO
@@ -48,15 +47,17 @@ class Home extends Component {
       <View style={{ flex: 1, backgroundColor: '#f1f1f1' }}>
         <NavigatorForHome {...this.props}/>
         <ScrollableTabView
-          tabBarUnderlineStyle={{backgroundColor: theme.themeColor}}
+          tabBarUnderlineStyle={{backgroundColor: 'transparent',position: 'absolute', bottom: -px(2), borderColor: theme.themeColor, borderBottomWidth: px(4)}}
           tabBarActiveTextColor={theme.themeColor}
           tabBarInactiveTextColor='#333'
-          style={{backgroundColor: 'rgba(200,200,200,.7)'}}
+          tabBarBackgroundColor='#fafafa'
+          prerenderingSiblingsNumber={1}
+          //tabBarPosition='overlayTop'
+          tabBarTextStyle={{marginTop: px(20), fontSize: px(26),fontWeight: '400'}}
         >
-          <Recommend tabLabel="个性推荐" {...this.props}/>
-          <Text tabLabel="歌单">歌单</Text>
-          <Text tabLabel="主播电台">主播电台</Text>
-          <Text tabLabel="排行榜">排行榜</Text>
+          <Recommend tabLabel="音乐" {...this.props}/>
+          <Text tabLabel="视频">歌单</Text>
+          <Text tabLabel="电台">主播电台</Text>
         </ScrollableTabView>
       </View>
     )
@@ -64,8 +65,8 @@ class Home extends Component {
 }
 const styles = StyleSheet.create({
   icon: {
-    height: px(60),
-    width: px(60)
+    height: px(48),
+    width: px(48)
   }
 })
 const mapStateToProps = (state)=> ({

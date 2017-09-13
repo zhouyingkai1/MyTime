@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet } from 'react-native'
+import { WingBlank, Button, List } from 'antd-mobile';
+
 import px from '../utils/pxToDp'
 import theme from '../utils/theme'
 const Item = List.Item;
@@ -32,8 +34,8 @@ class Friends extends Component{
 }
 const styles = StyleSheet.create({
   icon: {
-    height: px(40),
-    width: px(40)
+    height: px(46),
+    width: px(46)
   }
 })
 export default Friends

@@ -9,40 +9,48 @@ import theme from '../../utils/theme'
 import Swiper from 'react-native-swiper';
 
 const Recommend = (props)=> {
-  const { } = props
+  // const { } = props
   return(
     <ScrollView style={{flex: 1}}>
       <View stlye={styles.position}><Text style={{color: 'red', textAlign: 'center'}}>ddddd</Text></View>
       <View style={{flex: 1}}>
-        <Swiper autoplay={true} style={{height: px(400)}} >
+        <Swiper autoplay={true} style={{height: px(260)}} >
           {
             imgData.map((item, index)=> {
               return(
                 <View key={index}>
-                  <Image source={{uri: item.img}} style={{height: px(400), width: theme.screenWidth}}/>
+                  <Image source={{uri: item.img}} style={{height: px(260), width: theme.screenWidth}}/>
                 </View>  
               )
             }) 
           }
         </Swiper>
         <View style={styles.iconList}>
-          <TouchableOpacity style={styles.iconBox}>
+          <TouchableOpacity onPress={()=> console.log(2222)} style={styles.iconBox}>
             <View style={styles.imgBorder}>
-              <Image srouce={require('../../img/icon_fm.png')} style={styles.icon}/>
+              <Image source={require('../../img/icon_fm.png')} style={styles.icon}/>
             </View>
-            <Text>私人FM</Text>
+            <Text style={styles.iconText}>私人FM</Text>
+          </TouchableOpacity >
+          <TouchableOpacity onPress={()=> Toast.show(2)}  style={styles.iconBox}>
+            <View style={styles.imgBorder}>
+              <Image source={require('../../img/icon_fm.png')} style={styles.icon}/>
+            </View>
+            <Text style={styles.iconText}>每日推荐</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconBox}>
+          <TouchableOpacity onPress={()=> Toast.show(2)}  style={styles.iconBox}>
             <View style={styles.imgBorder}>
-              <Image srouce={require('../../img/icon_fm.png')} style={styles.icon}/>
+              <Image source={require('../../img/icon_cal.png')} style={[styles.icon,{justifyContent:'center',alignItems:'center'}]}>
+                <Text style={{marginTop: px(12), color: theme.themeColor, fontSize: px(20)}}>14</Text>
+              </Image>
             </View>
-            <Text>私人FM</Text>
+            <Text style={styles.iconText}>歌单</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.iconBox}>
+          <TouchableOpacity onPress={()=> Toast.show(3)}  style={styles.iconBox}>
             <View style={styles.imgBorder}>
-              <Image srouce={require('../../img/icon_fm.png')} style={styles.icon}/>
+              <Image source={require('../../img/icon_rank.png')} style={styles.icon}/>
             </View>
-            <Text>私人FM</Text>
+            <Text style={styles.iconText}>排行榜</Text>
           </TouchableOpacity>
         </View>
         <View><Text>ddddd</Text></View>
@@ -64,65 +72,46 @@ const Recommend = (props)=> {
         <View><Text>ddddd</Text></View>
       </View>
     </ScrollView>
-    // <View style={{flex: 1}}>
-    //   <View stlye={styles.position}><Text style={{color: 'red', textAlign: 'center'}}>ddddd</Text></View>
-    //   <ScrollView style={{flex: 1}}>
-    //     <View style={{flex: 1}}>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //       <View><Text>ddddd</Text></View>
-    //     </View>
-    //   </ScrollView>
-    // </View>
   )
 }
 const styles = StyleSheet.create({
   position: {
-    position: absolute,
+    position: 'absolute',
     zIndex: -10,
-    top: px(20)
+    bottom: px(20)
   },
   iconList: {
     flexDirection: 'row',
     alignItems: 'center',
-    height: px(230),
-    justifyContent: 'space-around'
-  },
-  iconBox: {
-    width: px(300),
-    height: px(230),
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: px(190),
+    justifyContent: 'space-around',
     borderBottomWidth: theme.segment.width,
     borderColor: '#999'
   },
+  iconBox: {
+    width: px(200),
+    height: px(190),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   imgBorder: {
-    border: theme.segment.width,
-    color: theme.themeColor,
-    height: px(150),
-    width: px(150),
+    borderWidth: theme.segment.width,
+    borderColor: theme.themeColor,
+    height: px(100),
+    width: px(100),
     borderRadius: px(75),
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: px(10)
   },
   icon: {
-    width: px(100),
-    heighh: px(100),
+    width: px(52),
+    height: px(52),
     tintColor: theme.themeColor
+  },
+  iconText: {
+    color: '#333',
+    fontSize: px(20)
   }
 })
 const imgData= [{
@@ -146,5 +135,5 @@ const imgData= [{
 },{
   id: 7,
   img: 'http://ww4.sinaimg.cn/large/7a8aed7bjw1ezrtpmdv45j20u00spahy.jpg',
-}],
+}]
 export default Recommend
