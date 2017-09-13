@@ -2,7 +2,7 @@
 个性推荐
 */
 import React from 'react'
-import { View, Image, Text, StyleSheet, ScrollView, InteractionManager } from 'react-native'
+import { View, Image, Text, StyleSheet, ScrollView, InteractionManager, TouchableOpacity } from 'react-native'
 import {Toast, Button } from 'antd-mobile';
 import px from '../../utils/pxToDp'
 import theme from '../../utils/theme'
@@ -14,17 +14,37 @@ const Recommend = (props)=> {
     <ScrollView style={{flex: 1}}>
       <View stlye={styles.position}><Text style={{color: 'red', textAlign: 'center'}}>ddddd</Text></View>
       <View style={{flex: 1}}>
-        <Swiper autoplay={true} style={styles.wrapper} >
+        <Swiper autoplay={true} style={{height: px(400)}} >
           {
             imgData.map((item, index)=> {
               return(
                 <View key={index}>
-                  <Image source={{uri: item.img}} style={{height: pxToDp(400), width: theme.screenWidth}}/>
+                  <Image source={{uri: item.img}} style={{height: px(400), width: theme.screenWidth}}/>
                 </View>  
               )
             }) 
           }
         </Swiper>
+        <View style={styles.iconList}>
+          <TouchableOpacity style={styles.iconBox}>
+            <View style={styles.imgBorder}>
+              <Image srouce={require('../../img/icon_fm.png')} style={styles.icon}/>
+            </View>
+            <Text>私人FM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconBox}>
+            <View style={styles.imgBorder}>
+              <Image srouce={require('../../img/icon_fm.png')} style={styles.icon}/>
+            </View>
+            <Text>私人FM</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.iconBox}>
+            <View style={styles.imgBorder}>
+              <Image srouce={require('../../img/icon_fm.png')} style={styles.icon}/>
+            </View>
+            <Text>私人FM</Text>
+          </TouchableOpacity>
+        </View>
         <View><Text>ddddd</Text></View>
         <View><Text>ddddd</Text></View>
         <View><Text>ddddd</Text></View>
@@ -75,6 +95,34 @@ const styles = StyleSheet.create({
     position: absolute,
     zIndex: -10,
     top: px(20)
+  },
+  iconList: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    height: px(230),
+    justifyContent: 'space-around'
+  },
+  iconBox: {
+    width: px(300),
+    height: px(230),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderBottomWidth: theme.segment.width,
+    borderColor: '#999'
+  },
+  imgBorder: {
+    border: theme.segment.width,
+    color: theme.themeColor,
+    height: px(150),
+    width: px(150),
+    borderRadius: px(75),
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  icon: {
+    width: px(100),
+    heighh: px(100),
+    tintColor: theme.themeColor
   }
 })
 const imgData= [{
