@@ -52,7 +52,7 @@ class Home extends Component {
           tabBarInactiveTextColor='#333'
           tabBarBackgroundColor='#fafafa'
           prerenderingSiblingsNumber={1}
-          //tabBarPosition='overlayTop'
+          tabBarPosition='overlayTop'
           tabBarTextStyle={{marginTop: px(20), fontSize: px(26),fontWeight: '400'}}
         >
           <Recommend tabLabel="音乐" {...this.props}/>

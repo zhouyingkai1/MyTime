@@ -9,61 +9,44 @@ import theme from '../../utils/theme'
 import Swiper from 'react-native-swiper';
 
 const Recommend = (props)=> {
-  // const { } = props
-  const renderSec = (item)=> {
-    return(
-      <View  key={item.title}>
-        <Text>{item.title}</Text>
-      </View>
-    )
-  }
+  const { lized } = props.home
   const renderFirst = (item)=> {
     return(
       <View key={item.title}>
-        <Text style={{color: 'red'}}>{item.title}</Text>
+        <Text style={{color: 'red'}}>{item.item.title}</Text>
       </View>
     )
   }
   const renderHeader = (item)=> {
-    console.log(item,'item')
     return(
-      <Text>2222</Text>
+      <View style={{width: 100 }} >
+        <Image source={{uri: 'https://w4.hoopchina.com.cn/7b/ef/3f/7bef3fee5e4425d3fd9ca022b919023b001.jpg'}} style={{height: 400, width: theme.screenWidth}}/>
+        
+        <Text key={item.item.title}>{item.item.title}</Text>
+      </View>  
+    )
+  }
+  const listheader = (sections)=> {
+    return(
+      <View style={{}}>
+        <Text style={styles.headerText}>{sections.section.key}</Text>
+      </View>
     )
   }
   return(
     <View style={{flex: 1}}>
-      <Text style={{position: 'absolute', top: px(20), left: 0}}>根据你的喜好推荐首页内容</Text>
-      <SectionList
-        style={{position: 'absolute', top: px(20), left: 0, backgroundColor: '#eee'}}
+      <SectionList 
+        renderSectionHeader={listheader}
+        keyExtractor={(item,index)=> index}
+        numColumns={3}
+        columnWrapperStyle={{flexDirection: 'row', backgroundColor: 'red', flex:1, flexWrap: 'wrap',  justifyContent:'space-between',alignItems:'center'}}
         sections={[
           {
             renderItem: renderHeader,
-            key: 's0',
-            data: imgData
-          },
-          {
-            renderItem: renderFirst,
-            key: 's1',
-            data: [{
-              title: '周莹凯',
-              title: '艾弗森',
-              title: '科比',
-              title: '加内特',
-            }]
-          },
-          {
-            renderItem: renderSec,
-            key: 's2',
-            data: [{
-              title: '牛魔王',
-              title: '至尊宝',
-              title: '紫霞',
-              title: '唐僧',
-            }]
-          },
+            key: '推荐歌单',
+            data: lized,
+          }
         ]}
-        ItemSeparatorComponent={() => <View style={{borderBottomColor: '#eee', borderBottomWidth: 1}}><Text></Text></View>}
-
         />
     </View>
   )
@@ -109,25 +92,25 @@ const styles = StyleSheet.create({
   }
 })
 const imgData= [{
-  id: 1,
+  key: 1,
   img: 'http://ww4.sinaimg.cn/large/610dc034jw1f41lxgc3x3j20jh0tcn14.jpg',
 },{
-  id: 2,
+  key: 2,
   img: 'http://ww4.sinaimg.cn/large/610dc034jw1f76axy6xcsj20u00yqq49.jpg',
 },{
-  id: 3,
+  key: 3,
   img: 'http://ww2.sinaimg.cn/large/610dc034jw1f72v5ra09fj20u011hdit.jpg',
 },{
-  id: 4,
+  key: 4,
   img: 'http://ww3.sinaimg.cn/large/610dc034gw1f5pu0w0r56j20m80rsjuy.jpg',
 },{
-  id: 5,
+  key: 5,
   img: 'http://ac-olwhhm4o.clouddn.com/4063qegYjlC8nx6uEqxV0kT3hn6hdqJqVWPKpdrS',
 },{
-  id: 6,
+  key: 6,
   img: 'http://ww4.sinaimg.cn/large/7a8aed7bjw1f1yjc38i9oj20hs0qoq6k.jpg',
 },{
-  id: 7,
+  key: 7,
   img: 'http://ww4.sinaimg.cn/large/7a8aed7bjw1ezrtpmdv45j20u00spahy.jpg',
 }]
 export default Recommend
