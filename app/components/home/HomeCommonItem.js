@@ -37,17 +37,17 @@ const HomeCommonItem = (props)=> {
         }
         {item.key == 'newSongs'?
           <View>
-          
+            <Text>最新音乐</Text>
           </View> : null
         }
         {item.key == 'mvList'?
           <View>
-
+            <Text>mvList</Text>
           </View> : null
         }
         {item.key == 'djList'?
           <View>
-
+            <Text>djList</Text>
           </View> : null
         }
         {item.key == 'privatecontent'?
