@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image, StyleSheet} from 'react-native'
 import px from '../../utils/pxToDp'
 import computerNum from '../../utils/computerNum'
 import theme from '../../utils/theme'
+import { Toast } from 'antd-mobile';
 const HomeCommonItem = (props)=> {
   const {data, item, navigation} = props
   const handlePress = ()=> {
@@ -18,17 +19,17 @@ const HomeCommonItem = (props)=> {
         {item.key == 'lized'?
           <View style={styles.box}>
             {
-              data.map((item, index)=> {
+              data.map((data, index)=> {
                 return (
-                  <View style={styles.item}>
-                    <Image style={styles.bgImg} source={{uri: item.picUrl}}>
+                  <TouchableOpacity onPress={()=>Toast.show(data.id)} key={index} onLongPress={()=> Toast(data.copywriter)} style={styles.item}>
+                    <Image style={styles.bgImg} source={{uri: data.picUrl}}>
                       <View style={styles.positoin}>
                         <Image style={style.img} source={require('../../img/headset.png')}/>
-                        <Text style={styles.playCount}>{computerNum(item.playCount)}</Text>
+                        <Text style={styles.playCount}>{computerNum(data.playCount)}</Text>
                       </View>
                     </Image>
-                    <Text numberOfLines={2} style={styles.font}>{item.name}</Text>
-                  </View>
+                    <Text numberOfLines={2} style={styles.font}>{data.name}</Text>
+                  </TouchableOpacity>
                 )
               })
             }
