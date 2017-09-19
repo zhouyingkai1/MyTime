@@ -21,14 +21,31 @@ class Home extends Component {
   }
   componentDidMount() {
     InteractionManager.runAfterInteractions(()=>{
+      this.props.dispatch({
+        type: 'home/getPersonalized',
+        payload: {}
+      })
+      this.props.dispatch({
+        type: 'home/getDjProgram',
+        payload: {}
+      })
+      this.props.dispatch({
+        type: 'home/getPrivatecontent',
+        payload: {}
+      })
+      this.props.dispatch({
+        type: 'home/getBanner',
+        payload: {}
+      })
+      this.props.dispatch({
+        type: 'home/getMv',
+        payload: {}
+      })
       storage.load({
         key: 'userInfo'
        }).then(ret => {
           //根据登录信息 请求首页数据
-          this.props.dispatch({
-            type: 'home/getPersonalized',
-            payload: {}
-          })
+          
         }).catch(err => {
           switch (err.name) {
             case 'NotFoundError':
@@ -44,7 +61,7 @@ class Home extends Component {
   render() {
     const { isSearch } = this.props.home
     return (
-      <View style={{ flex: 1, backgroundColor: '#f1f1f1' }}>
+      <View style={{ flex: 1, backgroundColor: '#fff' }}>
         <NavigatorForHome {...this.props}/>
         <ScrollableTabView
           tabBarUnderlineStyle={{backgroundColor: 'transparent',position: 'absolute', bottom: -px(2), borderColor: theme.themeColor, borderBottomWidth: px(4)}}

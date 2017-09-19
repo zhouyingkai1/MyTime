@@ -11,20 +11,21 @@ const HomeCommonItem = (props)=> {
   }
   return (
     <View>
-      <TouchableOpacity onPress={()=> handlePress()} style={{flexDirection: 'row', justifyContent: 'flex-start'}}>
+      
+      <TouchableOpacity onPress={()=> handlePress()} style={{flexDirection: 'row', marginBottom: px(20), justifyContent: 'flex-start'}}>
         <View style={{height: px(40), width: px(4), backgroundColor: theme.themeColor}}></View>
-        <Text style={{backgroundColor: 'transparent', marginLeft: px(20), marginRight: px(20), fontSize: px(28)}}>{item.name}</Text>
-        <Image source={require('../../img/arrow_right.png')} style={{height: px(40), width: px(40)}}/>
+        <Text style={{backgroundColor: 'transparent', marginLeft: px(10), lineHeight: px(40), marginRight: px(10), fontSize: px(28)}}>{item.name}</Text>
+        <Image source={require('../../img/arrow_right.png')} style={{height: px(44), width: px(40)}}/>
       </TouchableOpacity>
         {item.key == 'lized'?
           <View style={styles.box}>
             {
               data.map((data, index)=> {
                 return (
-                  <TouchableOpacity onPress={()=>Toast.show(data.id)} key={index} onLongPress={()=> Toast(data.copywriter)} style={styles.item}>
+                  <TouchableOpacity onPress={()=>Toast.show(data.id)} key={index} onLongPress={()=> Toast.show(data.copywriter)} style={styles.item}>
                     <Image style={styles.bgImg} source={{uri: data.picUrl}}>
                       <View style={styles.positoin}>
-                        <Image style={style.img} source={require('../../img/headset.png')}/>
+                        <Image style={styles.img} source={require('../../img/headset.png')}/>
                         <Text style={styles.playCount}>{computerNum(data.playCount)}</Text>
                       </View>
                     </Image>
@@ -70,6 +71,7 @@ const styles = StyleSheet.create({
   box: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+    flexWrap: 'wrap'
   },
   item: {
     width: theme.screenWidth / 3 - px(4),
@@ -81,20 +83,26 @@ const styles = StyleSheet.create({
   },
   positoin: {
     position: 'absolute',
-    right: px(20),
-    top: px(20),
+    right: px(6),
+    top: px(6),
     flexDirection: 'row'
   },
   img: {
-    width: px(30),
-    height: px(30)
+    width: px(22),
+    height: px(22),
+    marginRight: px(2)
   },
   playCount: {
     color: '#fff',
+    fontSize: px(22),
+    backgroundColor: 'transparent'
   },
   font: {
     color: '#333',
-    fontSize: px(28)
+    marginTop: px(14),
+    fontSize: px(24),
+    marginLeft: px(6),
+    width: theme.screenWidth / 3 - px(20),
   }
 })
 export default HomeCommonItem

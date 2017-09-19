@@ -10,14 +10,11 @@ import Swiper from 'react-native-swiper';
 import HomeCommonItem from './HomeCommonItem'
 const Recommend = (props)=> {
   const { banner, lized, newSongs, mvList, djList, privatecontent, listsOrder, navigation } = props.home
- 
+  console.log(props,'ss')
   const renderItem = (item)=> {
     return(
       <View></View>
     )
-  }
-  const renderFooter = ()=> {
-
   }
   //点击banner跳转时间
   const bannerPress = (item)=> {
@@ -26,15 +23,18 @@ const Recommend = (props)=> {
   const renderHeader = ()=> {
     return(
       <View style={{flex: 1}}>
+        <View style={{height: px(80)}}></View>
         {/* banner 轮播 */}
-        <Swiper autoplay={true} style={{height: px(260)}} >
+        <Swiper autoplay={true} style={{height: px(280)}} >
            {
             banner.map((item, index)=> {
               return(
                 <TouchableOpacity key={index} onPress={()=> bannerPress(item)}>
-                  <Image source={{uri: item.pic}} style={{height: px(260), width: theme.screenWidth}}>
-                    <Text style={{position: 'absolute', right: 0, bottom: px(10), paddingLeft: px(20), paddingRiht: px(20),
-                        borderBottomLeftRadius: 20, borderTopLeftRadius: 20, backgroundColor: item.titleColor, color: '#fff'}}>{item.typeTitle}</Text>
+                  <Image source={{uri: item.pic}} style={{height: px(280), width: theme.screenWidth}}>
+                    <View style={{position: 'absolute', borderTopLeftRadius: 20,backgroundColor: item.titleColor, 
+                    paddingLeft: px(20),  borderBottomLeftRadius: 20, height: px(32), justifyContent: 'center',right: 0, bottom: px(10), }}>
+                     <Text style={{fontSize: px(20), marginRight:px(10), color: '#fff'}}>{item.typeTitle}</Text>
+                    </View>
                   </Image>  
                 </TouchableOpacity>  
               )
@@ -45,9 +45,16 @@ const Recommend = (props)=> {
          <View style={styles.iconList}>
            {iconList.map((item, index)=> {
               return (
-                <TouchableOpacity onPress={()=> console.log(2222)} style={styles.iconBox}>
+                <TouchableOpacity key={index} onPress={()=> console.log(2222)} style={styles.iconBox}>
                   <View style={styles.imgBorder}>
-                    <Image source={require(`../../img/${item.icon}`)} style={styles.icon}/>
+                    {item.id == 1?<Image source={require('../../img/icon_fm.png')} style={styles.icon}/>:null}
+                    {item.id == 3?<Image source={require('../../img/icon_fm.png')} style={styles.icon}/>:null}
+                    {item.id == 2?
+                      <Image source={require('../../img/icon_cal.png')} style={[styles.icon,{justifyContent: 'center', alignItems: 'center'}]}>
+                        <Text style={{backgroundColor: 'transparent', fontSize: px(22), color: theme.themeColor, marginTop: px(14)}}>12</Text>
+                      </Image>
+                      :null}
+                    {item.id == 4?<Image source={require('../../img/icon_rank.png')} style={styles.icon}/>:null}
                   </View>
                   <Text style={styles.iconText}>{item.name}</Text>
                 </TouchableOpacity >
@@ -76,18 +83,17 @@ const Recommend = (props)=> {
                 data = privatecontent
                 break;
             }
-            return <HomeCommonItem data={data} item={item} navigation={navigation}/>
+            return <HomeCommonItem key={index} data={data} item={item} navigation={navigation}/>
           })
         }
       </View>
     )
   }
   return(
-    <View style={{flex: 1}}>
+    <View style={{flex: 1,}}>
       <FlatList
         data={[]}
         keyExtractor={(item,index)=> index}
-        ListFooterComponent={renderFooter}
         ListHeaderComponent={renderHeader}
         renderItem={({item, index}) => renderItem(item)}
       />
@@ -106,7 +112,8 @@ const styles = StyleSheet.create({
     height: px(190),
     justifyContent: 'space-around',
     borderBottomWidth: theme.segment.width,
-    borderColor: '#999'
+    borderColor: '#999',
+    marginBottom: px(20),
   },
   iconBox: {
     width: px(200),
@@ -131,7 +138,7 @@ const styles = StyleSheet.create({
   },
   iconText: {
     color: '#333',
-    fontSize: px(20)
+    fontSize: px(26)
   }
 })
 const iconList= [{
