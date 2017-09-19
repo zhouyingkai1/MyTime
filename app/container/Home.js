@@ -53,6 +53,7 @@ class Home extends Component {
           tabBarBackgroundColor='#fafafa'
           prerenderingSiblingsNumber={1}
           tabBarPosition='overlayTop'
+          backgroundColor={'rgba(240,240,240,0.98)'}
           tabBarTextStyle={{marginTop: px(20), fontSize: px(26),fontWeight: '400'}}
         >
           <Recommend tabLabel="音乐" {...this.props}/>

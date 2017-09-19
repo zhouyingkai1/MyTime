@@ -2,52 +2,95 @@
 个性推荐
 */
 import React from 'react'
-import { View, Image, Text, StyleSheet, SectionList, InteractionManager, TouchableOpacity } from 'react-native'
+import { View, Image, Text, StyleSheet, FlatList, InteractionManager, TouchableOpacity } from 'react-native'
 import {Toast, Button } from 'antd-mobile';
 import px from '../../utils/pxToDp'
 import theme from '../../utils/theme'
 import Swiper from 'react-native-swiper';
-
+import HomeCommonItem from './HomeCommonItem'
 const Recommend = (props)=> {
-  const { lized } = props.home
-  const renderFirst = (item)=> {
+  const { banner, lized, newSongs, mvList, djList, privatecontent, listsOrder, navigation } = props.home
+ 
+  const renderItem = (item)=> {
     return(
-      <View key={item.title}>
-        <Text style={{color: 'red'}}>{item.item.title}</Text>
-      </View>
+      <View></View>
     )
   }
-  const renderHeader = (item)=> {
-    return(
-      <View style={{width: 100 }} >
-        <Image source={{uri: 'https://w4.hoopchina.com.cn/7b/ef/3f/7bef3fee5e4425d3fd9ca022b919023b001.jpg'}} style={{height: 400, width: theme.screenWidth}}/>
-        
-        <Text key={item.item.title}>{item.item.title}</Text>
-      </View>  
-    )
+  const renderFooter = ()=> {
+
   }
-  const listheader = (sections)=> {
+  //点击banner跳转时间
+  const bannerPress = (item)=> {
+
+  }
+  const renderHeader = ()=> {
     return(
-      <View style={{}}>
-        <Text style={styles.headerText}>{sections.section.key}</Text>
+      <View style={{flex: 1}}>
+        {/* banner 轮播 */}
+        <Swiper autoplay={true} style={{height: px(260)}} >
+           {
+            banner.map((item, index)=> {
+              return(
+                <TouchableOpacity key={index} onPress={()=> bannerPress(item)}>
+                  <Image source={{uri: item.pic}} style={{height: px(260), width: theme.screenWidth}}>
+                    <Text style={{position: 'absolute', right: 0, bottom: px(10), paddingLeft: px(20), paddingRiht: px(20),
+                        borderBottomLeftRadius: 20, borderTopLeftRadius: 20, backgroundColor: item.titleColor, color: '#fff'}}>{item.typeTitle}</Text>
+                  </Image>  
+                </TouchableOpacity>  
+              )
+             }) 
+           }
+         </Swiper>
+         {/* icon 快捷入口 */}
+         <View style={styles.iconList}>
+           {iconList.map((item, index)=> {
+              return (
+                <TouchableOpacity onPress={()=> console.log(2222)} style={styles.iconBox}>
+                  <View style={styles.imgBorder}>
+                    <Image source={require(`../../img/${item.icon}`)} style={styles.icon}/>
+                  </View>
+                  <Text style={styles.iconText}>{item.name}</Text>
+                </TouchableOpacity >
+              )
+            })
+           }
+         </View>   
+        {/* 分类列表 */}
+        {
+          listsOrder.map((item, index) => {
+            let data = []
+            switch(item.key){
+              case 'lized':
+                data = lized
+                break;
+              case 'newSongs':
+                data = newSongs
+                break;
+              case 'mv':
+                data = mvList
+                break;
+              case 'dj':
+                data = djList
+                break;
+              case 'privatecontent':
+                data = privatecontent
+                break;
+            }
+            return <HomeCommonItem data={data} item={item} navigation={navigation}/>
+          })
+        }
       </View>
     )
   }
   return(
     <View style={{flex: 1}}>
-      <SectionList 
-        renderSectionHeader={listheader}
+      <FlatList
+        data={[]}
         keyExtractor={(item,index)=> index}
-        numColumns={3}
-        columnWrapperStyle={{flexDirection: 'row', backgroundColor: 'red', flex:1, flexWrap: 'wrap',  justifyContent:'space-between',alignItems:'center'}}
-        sections={[
-          {
-            renderItem: renderHeader,
-            key: '推荐歌单',
-            data: lized,
-          }
-        ]}
-        />
+        ListFooterComponent={renderFooter}
+        ListHeaderComponent={renderHeader}
+        renderItem={({item, index}) => renderItem(item)}
+      />
     </View>
   )
 }
@@ -91,71 +134,21 @@ const styles = StyleSheet.create({
     fontSize: px(20)
   }
 })
-const imgData= [{
-  key: 1,
-  img: 'http://ww4.sinaimg.cn/large/610dc034jw1f41lxgc3x3j20jh0tcn14.jpg',
+const iconList= [{
+  id: 1,
+  name: '私人FM',
+  icon: 'icon_fm.png'
 },{
-  key: 2,
-  img: 'http://ww4.sinaimg.cn/large/610dc034jw1f76axy6xcsj20u00yqq49.jpg',
+  id: 2,
+  name: '每日推荐',
+  icon: 'icon_cal.png'
 },{
-  key: 3,
-  img: 'http://ww2.sinaimg.cn/large/610dc034jw1f72v5ra09fj20u011hdit.jpg',
+  id: 3,
+  name: '歌单',
+  icon: 'icon_cal.png'
 },{
-  key: 4,
-  img: 'http://ww3.sinaimg.cn/large/610dc034gw1f5pu0w0r56j20m80rsjuy.jpg',
-},{
-  key: 5,
-  img: 'http://ac-olwhhm4o.clouddn.com/4063qegYjlC8nx6uEqxV0kT3hn6hdqJqVWPKpdrS',
-},{
-  key: 6,
-  img: 'http://ww4.sinaimg.cn/large/7a8aed7bjw1f1yjc38i9oj20hs0qoq6k.jpg',
-},{
-  key: 7,
-  img: 'http://ww4.sinaimg.cn/large/7a8aed7bjw1ezrtpmdv45j20u00spahy.jpg',
-}]
+  id: 4,
+  name: '排行榜',
+  icon: 'icon_rank.png'
+},]
 export default Recommend
-
-// <ScrollView style={{flex: 1}}>
-//       <View stlye={styles.position}><Text style={{color: 'red', textAlign: 'center'}}>ddddd</Text></View>
-//       <View style={{flex: 1}}>
-//         <Swiper autoplay={true} style={{height: px(260)}} >
-//           {
-//             imgData.map((item, index)=> {
-//               return(
-//                 <View key={index}>
-//                   <Image source={{uri: item.img}} style={{height: px(260), width: theme.screenWidth}}/>
-//                 </View>  
-//               )
-//             }) 
-//           }
-//         </Swiper>
-//         <View style={styles.iconList}>
-//           <TouchableOpacity onPress={()=> console.log(2222)} style={styles.iconBox}>
-//             <View style={styles.imgBorder}>
-//               <Image source={require('../../img/icon_fm.png')} style={styles.icon}/>
-//             </View>
-//             <Text style={styles.iconText}>私人FM</Text>
-//           </TouchableOpacity >
-//           <TouchableOpacity onPress={()=> Toast.show(2)}  style={styles.iconBox}>
-//             <View style={styles.imgBorder}>
-//               <Image source={require('../../img/icon_fm.png')} style={styles.icon}/>
-//             </View>
-//             <Text style={styles.iconText}>每日推荐</Text>
-//           </TouchableOpacity>
-//           <TouchableOpacity onPress={()=> Toast.show(2)}  style={styles.iconBox}>
-//             <View style={styles.imgBorder}>
-//               <Image source={require('../../img/icon_cal.png')} style={[styles.icon,{justifyContent:'center',alignItems:'center'}]}>
-//                 <Text style={{marginTop: px(12), color: theme.themeColor, fontSize: px(20)}}>14</Text>
-//               </Image>
-//             </View>
-//             <Text style={styles.iconText}>歌单</Text>
-//           </TouchableOpacity>
-//           <TouchableOpacity onPress={()=> Toast.show(3)}  style={styles.iconBox}>
-//             <View style={styles.imgBorder}>
-//               <Image source={require('../../img/icon_rank.png')} style={styles.icon}/>
-//             </View>
-//             <Text style={styles.iconText}>排行榜</Text>
-//           </TouchableOpacity>
-//         </View>
-//       </View>
-//     </ScrollView>
