@@ -11,7 +11,6 @@ const HomeCommonItem = (props)=> {
   }
   return (
     <View>
-      
       <TouchableOpacity onPress={()=> handlePress()} style={{flexDirection: 'row', marginBottom: px(20), justifyContent: 'flex-start'}}>
         <View style={{height: px(40), width: px(4), backgroundColor: theme.themeColor}}></View>
         <Text style={{backgroundColor: 'transparent', marginLeft: px(10), lineHeight: px(40), marginRight: px(10), fontSize: px(28)}}>{item.name}</Text>

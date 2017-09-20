@@ -20,6 +20,9 @@ class Home extends Component {
     super(props)
   }
   componentDidMount() {
+    setTimeout(()=> {
+      updateState('isDidMount', true)
+    },1000)
     InteractionManager.runAfterInteractions(()=>{
       storage.load({
         key: 'lized'

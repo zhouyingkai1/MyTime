@@ -9,8 +9,7 @@ import theme from '../../utils/theme'
 import Swiper from 'react-native-swiper';
 import HomeCommonItem from './HomeCommonItem'
 const Recommend = (props)=> {
-  const { banner, lized, newSongs, mvList, djList, privatecontent, listsOrder, navigation } = props.home
-  console.log(props,'ss')
+  const { banner, lized, newSongs, mvList, djList, privatecontent, listsOrder, navigation, isDidMount } = props.home
   const renderItem = (item)=> {
     return(
       <View></View>
@@ -23,73 +22,77 @@ const Recommend = (props)=> {
  
   return(
     <View style={{flex: 1,}}>
-      <ScrollView>
-        <View style={{flex: 1}}>
-          <View style={{height: px(80)}}></View>
-          {/* banner 轮播 */}
-          <Swiper autoplay={true} style={{height: px(280)}} >
-            {
-              banner.map((item, index)=> {
-                return(
-                  <TouchableOpacity key={index} onPress={()=> bannerPress(item)}>
-                    <Image source={{uri: item.pic}} style={{height: px(280), width: theme.screenWidth}}>
-                      <View style={{position: 'absolute', borderTopLeftRadius: 20,backgroundColor: item.titleColor, 
-                      paddingLeft: px(20),  borderBottomLeftRadius: 20, height: px(32), justifyContent: 'center',right: 0, bottom: px(10), }}>
-                      <Text style={{fontSize: px(20), marginRight:px(10), color: '#fff'}}>{item.typeTitle}</Text>
+      {
+        isDidMount?
+        <ScrollView>
+          <View style={{flex: 1}}>
+            <View style={{height: px(80)}}></View>
+            {/* banner 轮播 */}
+            <Swiper autoplay={true} style={{height: px(280)}} >
+              {
+                banner.map((item, index)=> {
+                  return(
+                    <TouchableOpacity key={index} onPress={()=> bannerPress(item)}>
+                      <Image source={{uri: item.pic}} style={{height: px(280), width: theme.screenWidth}}>
+                        <View style={{position: 'absolute', borderTopLeftRadius: 20,backgroundColor: item.titleColor, 
+                        paddingLeft: px(20),  borderBottomLeftRadius: 20, height: px(32), justifyContent: 'center',right: 0, bottom: px(10), }}>
+                        <Text style={{fontSize: px(20), marginRight:px(10), color: '#fff'}}>{item.typeTitle}</Text>
+                        </View>
+                      </Image>  
+                    </TouchableOpacity>  
+                  )
+                }) 
+              }
+            </Swiper>
+            {/* icon 快捷入口 */}
+            <View style={styles.iconList}>
+              {iconList.map((item, index)=> {
+                  return (
+                    <TouchableOpacity key={index} onPress={()=> console.log(2222)} style={styles.iconBox}>
+                      <View style={styles.imgBorder}>
+                        {item.id == 1?<Image source={require('../../img/icon_fm.png')} style={styles.icon}/>:null}
+                        {item.id == 3?<Image source={require('../../img/icon_fm.png')} style={styles.icon}/>:null}
+                        {item.id == 2?
+                          <Image source={require('../../img/icon_cal.png')} style={[styles.icon,{justifyContent: 'center', alignItems: 'center'}]}>
+                            <Text style={{backgroundColor: 'transparent', fontSize: px(22), color: theme.themeColor, marginTop: px(14)}}>12</Text>
+                          </Image>
+                          :null}
+                        {item.id == 4?<Image source={require('../../img/icon_rank.png')} style={styles.icon}/>:null}
                       </View>
-                    </Image>  
-                  </TouchableOpacity>  
-                )
-              }) 
-            }
-          </Swiper>
-          {/* icon 快捷入口 */}
-          <View style={styles.iconList}>
-            {iconList.map((item, index)=> {
-                return (
-                  <TouchableOpacity key={index} onPress={()=> console.log(2222)} style={styles.iconBox}>
-                    <View style={styles.imgBorder}>
-                      {item.id == 1?<Image source={require('../../img/icon_fm.png')} style={styles.icon}/>:null}
-                      {item.id == 3?<Image source={require('../../img/icon_fm.png')} style={styles.icon}/>:null}
-                      {item.id == 2?
-                        <Image source={require('../../img/icon_cal.png')} style={[styles.icon,{justifyContent: 'center', alignItems: 'center'}]}>
-                          <Text style={{backgroundColor: 'transparent', fontSize: px(22), color: theme.themeColor, marginTop: px(14)}}>12</Text>
-                        </Image>
-                        :null}
-                      {item.id == 4?<Image source={require('../../img/icon_rank.png')} style={styles.icon}/>:null}
-                    </View>
-                    <Text style={styles.iconText}>{item.name}</Text>
-                  </TouchableOpacity >
-                )
+                      <Text style={styles.iconText}>{item.name}</Text>
+                    </TouchableOpacity >
+                  )
+                })
+              }
+            </View>   
+            {/* 分类列表 */}
+            {
+              listsOrder.map((item, index) => {
+                let data = []
+                switch(item.key){
+                  case 'lized':
+                    data = lized
+                    break;
+                  case 'newSongs':
+                    data = newSongs
+                    break;
+                  case 'mv':
+                    data = mvList
+                    break;
+                  case 'dj':
+                    data = djList
+                    break;
+                  case 'privatecontent':
+                    data = privatecontent
+                    break;
+                }
+                return <HomeCommonItem key={index} data={data} item={item} navigation={navigation}/>
               })
             }
-          </View>   
-          {/* 分类列表 */}
-          {
-            listsOrder.map((item, index) => {
-              let data = []
-              switch(item.key){
-                case 'lized':
-                  data = lized
-                  break;
-                case 'newSongs':
-                  data = newSongs
-                  break;
-                case 'mv':
-                  data = mvList
-                  break;
-                case 'dj':
-                  data = djList
-                  break;
-                case 'privatecontent':
-                  data = privatecontent
-                  break;
-              }
-              return <HomeCommonItem key={index} data={data} item={item} navigation={navigation}/>
-            })
-          }
-        </View>
-      </ScrollView>
+          </View>
+        </ScrollView>
+       : <View><Text>加载中……</Text></View>
+      }  
     </View>
   )
 }

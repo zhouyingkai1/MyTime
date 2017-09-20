@@ -30,7 +30,8 @@ export default{
     newSongs: [],
     mvList: [],
     djList: [],
-    privatecontent: []
+    privatecontent: [],
+    isDidMount: false
   },
   effects: {
     // dj电台
