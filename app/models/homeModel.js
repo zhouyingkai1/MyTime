@@ -55,6 +55,11 @@ export default{
             privatecontent: result.result
           }
         })
+        storage.save({
+          key: 'privatecontent',  
+          data: result.result,
+          expires: null
+        });
       }
     },
     *getBanner({payload}, {call, put}) {
@@ -66,6 +71,11 @@ export default{
             banner: result.banners
           }
         })
+        storage.save({
+          key: 'banner',  
+          data: result.banners,
+          expires: null
+        });
       }
     },
     *getMv({payload}, {call, put}) {
@@ -77,6 +87,11 @@ export default{
             mvList: result.result
           }
         })
+        storage.save({
+          key: 'mvList',  
+          data: result.result,
+          expires: null
+        });
       }
     },
     //推荐歌单
@@ -89,6 +104,11 @@ export default{
             lized: result.result
           }
         })
+        storage.save({
+          key: 'lized',  
+          data: result.result,
+          expires: null
+        });
       }
     },
     *getNewSong({payload}, {call, put}) {
@@ -112,6 +132,11 @@ export default{
             newSongs: data
           }
         })
+        storage.save({
+          key: 'newSongs',  
+          data: data,
+          expires: null
+        });
       }
     },
   },

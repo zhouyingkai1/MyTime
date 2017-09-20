@@ -21,26 +21,78 @@ class Home extends Component {
   }
   componentDidMount() {
     InteractionManager.runAfterInteractions(()=>{
-      this.props.dispatch({
-        type: 'home/getPersonalized',
-        payload: {}
-      })
-      this.props.dispatch({
-        type: 'home/getDjProgram',
-        payload: {}
-      })
-      this.props.dispatch({
-        type: 'home/getPrivatecontent',
-        payload: {}
-      })
-      this.props.dispatch({
-        type: 'home/getBanner',
-        payload: {}
-      })
-      this.props.dispatch({
-        type: 'home/getMv',
-        payload: {}
-      })
+      storage.load({
+        key: 'lized'
+       }).then(ret => {
+          updateState('lized',ret)
+        }).catch(err => {
+            if(err.name == 'NotFoundError'){
+              this.props.dispatch({
+                type: 'home/getPersonalized',
+                payload: {}
+              })
+            }
+        })
+      storage.load({
+        key: 'newSongs'
+       }).then(ret => {
+          updateState('newSongs',ret)
+        }).catch(err => {
+            if(err.name == 'NotFoundError'){
+              this.props.dispatch({
+                type: 'home/getNewSong',
+                payload: {}
+              })
+            }
+        })
+      storage.load({
+        key: 'mvList'
+       }).then(ret => {
+          updateState('mvList',ret)
+        }).catch(err => {
+            if(err.name == 'NotFoundError'){
+              this.props.dispatch({
+                type: 'home/getMv',
+                payload: {}
+              })
+            }
+        })
+      storage.load({
+        key: 'djList'
+       }).then(ret => {
+          updateState('djList',ret)
+        }).catch(err => {
+            if(err.name == 'NotFoundError'){
+              this.props.dispatch({
+                type: 'home/getDjProgram',
+                payload: {}
+              })
+            }
+        })
+      storage.load({
+        key: 'banner'
+       }).then(ret => {
+          updateState('banner',ret)
+        }).catch(err => {
+            if(err.name == 'NotFoundError'){
+              this.props.dispatch({
+                type: 'home/getBanner',
+                payload: {}
+              })
+            }
+        })
+      storage.load({
+        key: 'privatecontent'
+       }).then(ret => {
+          updateState('privatecontent',ret)
+        }).catch(err => {
+            if(err.name == 'NotFoundError'){
+              this.props.dispatch({
+                type: 'home/getPrivatecontent',
+                payload: {}
+              })
+            }
+        })
       storage.load({
         key: 'userInfo'
        }).then(ret => {
@@ -49,6 +101,7 @@ class Home extends Component {
         }).catch(err => {
           switch (err.name) {
             case 'NotFoundError':
+            
               break;
             case 'ExpiredError':
               // TODO
@@ -57,7 +110,12 @@ class Home extends Component {
         })
     })
   }
-
+  updateState = ( name, val) => {
+    this.props.dispatch({
+      type: 'home/updateState',
+      [name]: val
+    })
+  }
   render() {
     const { isSearch } = this.props.home
     return (
