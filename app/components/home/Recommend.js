@@ -19,7 +19,6 @@ const Recommend = (props)=> {
   const bannerPress = (item)=> {
 
   }
- 
   return(
     <View style={{flex: 1,}}>
       {
@@ -91,7 +90,7 @@ const Recommend = (props)=> {
             }
           </View>
         </ScrollView>
-       : <View><Text>加载中……</Text></View>
+       : <View style={{marginTop: px(140)}}><Text style={{textAlign: 'center'}}>玩命加载中……</Text></View>
       }  
     </View>
   )

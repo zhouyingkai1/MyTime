@@ -53,7 +53,6 @@ export default function request(url, options) {
 }
 export function getRequest(url) {
   url  = /http:\\/.test(url) ? url : pathInterceptor.request(url)
-  console.log(url,'sss')
   return fetch(url,{
     method: 'GET'
   })

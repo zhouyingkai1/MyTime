@@ -21,13 +21,23 @@ class Home extends Component {
   }
   componentDidMount() {
     setTimeout(()=> {
-      updateState('isDidMount', true)
-    },1000)
+      this.props.dispatch({
+        type: 'home/updateState',
+        payload:{
+          isDidMount: true
+        }
+      })
+    },1400)
     InteractionManager.runAfterInteractions(()=>{
       storage.load({
         key: 'lized'
        }).then(ret => {
-          updateState('lized',ret)
+          this.props.dispatch({
+            type: 'home/updateState',
+            payload:{
+              lized: ret
+            }
+          })
         }).catch(err => {
             if(err.name == 'NotFoundError'){
               this.props.dispatch({
@@ -39,7 +49,7 @@ class Home extends Component {
       storage.load({
         key: 'newSongs'
        }).then(ret => {
-          updateState('newSongs',ret)
+          this.updateState('newSongs',ret)
         }).catch(err => {
             if(err.name == 'NotFoundError'){
               this.props.dispatch({
@@ -51,7 +61,7 @@ class Home extends Component {
       storage.load({
         key: 'mvList'
        }).then(ret => {
-          updateState('mvList',ret)
+          this.updateState('mvList',ret)
         }).catch(err => {
             if(err.name == 'NotFoundError'){
               this.props.dispatch({
@@ -63,7 +73,7 @@ class Home extends Component {
       storage.load({
         key: 'djList'
        }).then(ret => {
-          updateState('djList',ret)
+          this.updateState('djList',ret)
         }).catch(err => {
             if(err.name == 'NotFoundError'){
               this.props.dispatch({
@@ -75,7 +85,12 @@ class Home extends Component {
       storage.load({
         key: 'banner'
        }).then(ret => {
-          updateState('banner',ret)
+         this.props.dispatch({
+           type: 'home/updateState',
+           payload:{
+             banner: ret
+           }
+         })
         }).catch(err => {
             if(err.name == 'NotFoundError'){
               this.props.dispatch({
@@ -87,7 +102,7 @@ class Home extends Component {
       storage.load({
         key: 'privatecontent'
        }).then(ret => {
-          updateState('privatecontent',ret)
+          this.updateState('privatecontent',ret)
         }).catch(err => {
             if(err.name == 'NotFoundError'){
               this.props.dispatch({

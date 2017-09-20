@@ -20,6 +20,7 @@ const HomeCommonItem = (props)=> {
           <View style={styles.box}>
             {
               data.map((data, index)=> {
+                console.log(item.key,'ddddd')
                 return (
                   <TouchableOpacity onPress={()=>Toast.show(data.id)} key={index} onLongPress={()=> Toast.show(data.copywriter)} style={styles.item}>
                     <Image style={styles.bgImg} source={{uri: data.picUrl}}>
