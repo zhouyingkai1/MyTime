@@ -15,7 +15,7 @@ const Recommend = (props)=> {
       <View></View>
     )
   }
-  //点击banner跳转时间
+  //点击banner跳转事件
   const bannerPress = (item)=> {
 
   }
