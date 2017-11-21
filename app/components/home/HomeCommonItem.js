@@ -73,6 +73,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexWrap: 'wrap'
   },
+  
   item: {
     width: theme.screenWidth / 3 - px(4),
     marginBottom: px(30)
