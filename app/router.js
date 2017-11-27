@@ -17,11 +17,7 @@ import User from './container/User'
 import Friends from './container/Friends'
 import MyMusic from './container/MyMusic'
 import UserScreen from './container/User'
-import Detail from './page/Detail'
-import UserDetail from './page/UserDetail'
-import LoginTypeSelect from './page/login/LoginTypeSelect'
-import LoginByPhone from './page/login/LoginByPhone'
-
+import IndexPage from './page/login/IndexPage'
 const TabBar = TabNavigator({
   Home: { screen: Home },
   MyMusic: { screen: MyMusic },
@@ -47,20 +43,10 @@ const TabBar = TabNavigator({
 });
 // headerMode
 const AppNavigator = StackNavigator({
+  IndexPage: {
+    screen: IndexPage,
+  },
   TabBar: { screen: TabBar },
-  Detail: { 
-    screen: Detail, 
-  },
-  UserDetail: { 
-    screen: UserDetail, 
-  },
-  LoginTypeSelect: {
-    screen: LoginTypeSelect,
-  },
-  LoginByPhone: {
-    screen: LoginByPhone,
-    navigationOptions: ({navigation}) => StackOptions({navigation})
-  },
 },{
   headerMode : 'screen'
 });
